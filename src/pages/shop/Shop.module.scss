@@ -1,0 +1,49 @@
+.main {
+  margin: 0 auto;
+  //   background-color: #f1f3e4;
+}
+
+.container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 40px 180px;
+}
+
+.productsContainer {
+  display: grid;
+  gap: 40px;
+  grid-template-columns: 1fr 6fr;
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  //   align-items: center;
+  //   justify-content: space-between;
+  //   padding: 20px 0;
+}
+
+.inputPrix {
+  width: 30%;
+}
+
+.products {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Phone Portrait */
+@media screen and (max-width: 767px) and (orientation: portrait) {
+  .container {
+    padding: 20px;
+  }
+
+  .products {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

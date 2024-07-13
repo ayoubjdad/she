@@ -1,0 +1,42 @@
+.main {
+  margin: 0 auto;
+  background-color: #f1f3e4;
+}
+
+.container {
+  margin: 0;
+  height: 80vh;
+  background-image: url("https://corano-demo.myshopify.com/cdn/shop/files/home1-slide2_1920x.jpg?v=1613779271");
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 180px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 60px;
+}
+
+.description {
+  font-size: 24px;
+  font-weight: 100;
+}
+
+/* Phone Portrait */
+@media screen and (max-width: 767px) and (orientation: portrait) {
+  .container {
+    margin: 0;
+    height: 50vh;
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 30px;
+  }
+
+  .description {
+    font-size: 12px;
+  }
+}

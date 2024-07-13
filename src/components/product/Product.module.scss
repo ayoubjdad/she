@@ -1,0 +1,50 @@
+.product {
+  cursor: pointer;
+  display: grid;
+  width: 100%;
+
+  .productImage {
+    padding: 10px;
+    height: 0;
+    padding-bottom: 100%;
+    background-size: cover;
+    background-position: center;
+    background-size: 100%;
+    transition: 600ms;
+
+    &:hover {
+      background-size: 120%;
+    }
+
+    .tag {
+      background-color: black;
+      color: white;
+      padding: 3px 6px;
+      font-size: 10px;
+    }
+  }
+}
+
+.infos {
+  text-align: center;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  padding: 16px;
+}
+
+.category {
+  font-size: 12px;
+  color: gray;
+}
+
+/* Phone Portrait */
+@media screen and (max-width: 767px) and (orientation: portrait) {
+  .container {
+    padding: 20px;
+  }
+
+  .products {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

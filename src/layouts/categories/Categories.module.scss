@@ -1,0 +1,56 @@
+.main {
+  margin: 0 auto;
+  background-color: #f1f3e4;
+}
+
+.container {
+  // max-width: 1360px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.categories {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.category {
+  display: grid;
+  width: 100%;
+}
+
+.categoryImage {
+  padding: 90% 0 24px 24px;
+  background-position: center;
+  transition: 600ms;
+  display: flex;
+  align-items: flex-end;
+  background-size: 100%;
+
+  &:hover {
+    background-size: 120%;
+  }
+}
+
+.title {
+  font-size: 24px;
+}
+
+/* Phone Portrait */
+@media screen and (max-width: 767px) and (orientation: portrait) {
+  .container {
+    padding: 20px;
+  }
+
+  .categories {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .title {
+    font-size: 16px;
+  }
+}

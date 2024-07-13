@@ -1,0 +1,74 @@
+.main {
+  margin: 0 auto;
+  background-color: #e0e1d5;
+}
+
+.container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 40px 180px 100px;
+}
+
+.footerGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 20px;
+}
+
+.logo {
+  width: 80px;
+}
+
+.description {
+  font-size: 12px;
+  color: gray;
+  max-width: 300px;
+}
+
+.gridElement {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  p {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.copyright {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 20px 180px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  img {
+    width: 200px;
+  }
+}
+
+/* Phone Portrait */
+@media screen and (max-width: 767px) and (orientation: portrait) {
+  .container {
+    padding: 40px 20px;
+  }
+
+  .footerGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .copyright {
+    padding: 20px;
+    display: grid;
+    gap: 12px;
+  }
+}

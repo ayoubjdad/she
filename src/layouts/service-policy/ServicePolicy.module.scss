@@ -1,0 +1,44 @@
+.main {
+  margin: 0 auto;
+  background-color: #e0e1d5;
+}
+
+.container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 40px 180px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.element {
+  display: grid;
+  gap: 4px;
+  text-align: center;
+  i {
+    font-size: 30px;
+    justify-content: center;
+    margin-bottom: 4px;
+  }
+}
+
+.title {
+  font-weight: 700;
+}
+
+.description {
+  color: gray;
+  font-weight: 300;
+}
+
+/* Phone Portrait */
+@media screen and (max-width: 767px) and (orientation: portrait) {
+  .container {
+    padding: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 26px;
+  }
+}

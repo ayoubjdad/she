@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+  border-radius: 60px;
+  height: 28px;
+  padding: 0 16px;
+  border: 1px solid;
+  transition: 600ms;
+  &:hover {
+    // background-color: #957643;
+  }
+
+  input {
+    height: 100%;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 0px;
+    border: none;
+    background-color: transparent;
+  }
+  input:focus-visible {
+    border: none;
+    outline: none;
+  }
+}
+
+/* Phone Portrait */
+@media screen and (max-width: 767px) and (orientation: portrait) {
+  // .container {
+  //   width: fit-content;
+  //   font-family: inherit;
+  //   padding: 8px 20px;
+  //   border-radius: 60px;
+  //   border: 1px solid;
+  //   font-weight: 500;
+  //   font-size: 12px;
+  // }
+}
