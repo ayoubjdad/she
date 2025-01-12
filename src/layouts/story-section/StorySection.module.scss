@@ -1,0 +1,47 @@
+.main {
+  gap: 32px;
+  padding: 80px;
+  display: grid;
+  background-color: #fffcf0;
+}
+
+.storySection {
+  display: flex;
+  flex-direction: column;
+  background-color: #fffcf0;
+}
+
+.content {
+  font-size: 42px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.image {
+  height: 50px;
+  vertical-align: middle;
+}
+
+.statistics {
+  gap: 16px;
+  display: grid;
+  background-color: #fffcf0;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.divider {
+  border-top: 1px solid #dcd9cd;
+  width: 100%;
+}
+
+.stat {
+}
+
+.stat h1 {
+  font-size: 92px;
+}
+
+.stat p {
+  font-size: 14px;
+  line-height: 1.5;
+}

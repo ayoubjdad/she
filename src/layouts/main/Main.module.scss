@@ -1,0 +1,35 @@
+.main {
+  height: 60vh;
+  padding: 80px;
+  display: grid;
+  align-items: flex-end;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("https://katerinaperez.com/uploads/editor_file/link/35347/Louis_Vuitton_Le_Mythe_Necklace_-_Bravery_collection_Model_shoot_2.jpeg");
+  background-size: cover;
+}
+
+.container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.textArea {
+  gap: 16px;
+  display: grid;
+  max-width: 40%;
+  overflow: hidden;
+}
+
+.title {
+  font-size: 52px;
+  color: #fffcf0;
+}
+
+.description {
+  line-height: 1.5;
+  width: 70%;
+  font-size: 14px;
+  color: #fffcf0;
+  font-family: "Core Sans AR45";
+}

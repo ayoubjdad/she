@@ -1,0 +1,65 @@
+.main {
+  padding: 80px;
+  //   background-color: #fffcf0;
+  background-color: #e9e5d7;
+}
+
+.container {
+  gap: 32px;
+  display: grid;
+  justify-items: center;
+}
+
+.title {
+  gap: 16px;
+  display: grid;
+  justify-items: center;
+
+  h1 {
+    font-size: 48px;
+  }
+
+  p {
+    font-size: 14px;
+    font-family: "Core Sans AR45";
+  }
+}
+
+.products {
+  margin-top: 32px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+// * ==============================================
+// * Product Card
+// * ==============================================
+
+.productCard {
+  width: 300px;
+  overflow: hidden;
+}
+
+.imageContainer {
+  padding: 12px;
+  height: 300px;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+.productContainer {
+  gap: 12px;
+  display: grid;
+  padding: 15px 0;
+}
+
+.material {
+  font-family: Core Sans AR45;
+  font-size: 12px;
+}
+
+.price {
+  font-size: 14px;
+  font-weight: 700;
+}

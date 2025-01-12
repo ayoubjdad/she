@@ -1,0 +1,41 @@
+.main {
+  padding: 80px;
+  background-color: #c8d6b4;
+}
+
+.container {
+  gap: 32px;
+  display: grid;
+
+  h1 {
+    width: 70%;
+    font-size: 44px;
+    font-weight: 500;
+  }
+}
+
+.email {
+  gap: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.copyright {
+  gap: 32px;
+  display: flex;
+  padding: 20px 80px;
+  background-color: #291f1e;
+  justify-content: space-between;
+}
+
+.pages {
+  gap: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.divider {
+  width: 1px;
+  height: 80%;
+  border-left: 1px solid #353231;
+}

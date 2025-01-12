@@ -1,0 +1,30 @@
+.main {
+  top: 23px;
+  position: absolute;
+  padding: 20px 80px;
+  background-color: transparent;
+  width: -webkit-fill-available;
+}
+
+.container {
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.logo {
+  display: flex;
+  color: white;
+  font-size: 24px;
+  justify-content: center;
+}
+
+.group {
+  gap: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.groupEnd {
+  justify-content: flex-end;
+}
