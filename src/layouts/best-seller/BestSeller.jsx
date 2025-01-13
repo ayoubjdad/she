@@ -30,7 +30,7 @@ export default function BestSeller() {
   );
 }
 
-const Product = ({ title, price, image }) => {
+export const Product = ({ title, price, image }) => {
   return (
     <div className={styles.productCard}>
       <div

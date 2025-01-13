@@ -8,26 +8,26 @@ export default function StorySection() {
       <div className={styles.storySection}>
         <div className={styles.content}>
           <span>
-            Crafting timeless jewelry{" "}
+            Crafting timeless jewelry
             <img
               className={styles.image}
               src="https://www.vam.ac.uk/on/demandware.static/-/Sites-VAM_Storefront/default/dw88c1556f/images/category/jewellery/jewellery_homepage_desktop.jpg"
               alt=""
-            />{" "}
+            />
             that carries personal stories. Each piece reflects artistry and
-            soulful elegance{" "}
+            soulful elegance
             <img
               className={styles.image}
               src="https://www.vam.ac.uk/on/demandware.static/-/Sites-VAM_Storefront/default/dw88c1556f/images/category/jewellery/jewellery_homepage_desktop.jpg"
               alt=""
-            />{" "}
+            />
             resonating with unique narratives. Explore our collection where
-            beauty meets emotion, revealing adornments{" "}
+            beauty meets emotion, revealing adornments
             <img
               className={styles.image}
               src="https://www.vam.ac.uk/on/demandware.static/-/Sites-VAM_Storefront/default/dw88c1556f/images/category/jewellery/jewellery_homepage_desktop.jpg"
               alt=""
-            />{" "}
+            />
             with profound tales.
           </span>
         </div>
