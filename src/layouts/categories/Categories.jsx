@@ -7,16 +7,16 @@ export default function Categories() {
     <div className={styles.main}>
       <div className={styles.container}>
         <Chip
-          label="Our Expertise"
+          label="Notre expertise"
           style={{ color: "#291f1e", borderColor: "#291f1e" }}
         />
         <h1 className={styles.title}>
-          Creations showcasing a spectrum of radiant Gemstones.
+          Créations mettant en valeur un éventail de Gemmes éclatantes.
         </h1>
 
         <div className={styles.categories}>
           <li className={styles.list}>
-            {["Earnings", "Braclets", "Necklaces", "Rings"].map(
+            {["Boucles d'oreilles", "Bracelets", "Colliers", "Bagues"].map(
               (item, index) => (
                 <ul key={index}>
                   {item}

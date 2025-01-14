@@ -14,7 +14,7 @@ export default function Product() {
   const { product = {} } = location.state || {};
 
   if (!product) {
-    return <p>No product data available.</p>;
+    return <p>Aucune donnée de produit disponible.</p>;
   }
 
   const recommendations = products.filter(
@@ -29,7 +29,7 @@ export default function Product() {
         <Chip
           label={
             <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-              <i className="fi fi-rr-arrow-left" /> Back to Home
+              <i className="fi fi-rr-arrow-left" /> Retour à l'accueil
             </div>
           }
           style={{
@@ -37,7 +37,7 @@ export default function Product() {
             borderColor: "#291f1e",
             cursor: "pointer",
           }}
-          onClick={goToHome} // Handle click to redirect
+          onClick={goToHome} // Gérer le clic pour rediriger
         />
 
         <div className={styles.product}>
@@ -47,7 +47,7 @@ export default function Product() {
 
         <div className={styles.divider} />
 
-        <h1>Recommendations</h1>
+        <h1>Recommandations</h1>
         <div className={styles.products}>
           {recommendations.slice(0, 4).map((product) => (
             <SingleProduct product={product} />
@@ -72,7 +72,7 @@ const Details = ({ product }) => {
         </div>
       </div>
 
-      <h3>Detailed Information</h3>
+      <h3>Informations détaillées</h3>
 
       <p className={styles.description}>{description}</p>
     </div>
@@ -87,7 +87,7 @@ const AddToCart = ({ product, setCart, addToCart = () => {} }) => {
 
   return (
     <div className={styles.addToCart}>
-      <Chip label="New Arrival" style={chipStyle} />
+      <Chip label="Nouvelle arrivée" style={chipStyle} />
 
       <h1>{name}</h1>
       <p>{price} DH</p>
@@ -118,19 +118,33 @@ const AddToCart = ({ product, setCart, addToCart = () => {} }) => {
         </div>
       </div>
 
-      <Button style={{ width: "100%" }} onClick={() => addToCart(product, 1)}>
-        Add to Cart
-      </Button>
+      <div className={styles.shopDetails}>
+        <Button
+          style={{
+            width: "100%",
+            color: "#291f1e",
+            border: "1px solid #291f1e",
+            backgroundColor: "transparent",
+          }}
+          onClick={() => addToCart(product, 1)}
+        >
+          Ajouter au panier
+        </Button>
+
+        <Button style={{ width: "100%" }} onClick={() => addToCart(product, 1)}>
+          Acheter maintenant
+        </Button>
+      </div>
 
       <div className={styles.infos}>
         <i className="fi fi-rs-shield-check" />
-        <p>Guarantee for 30 days</p>
+        <p>Garantie de 30 jours</p>
         <div className={styles.verticalDivider} />
         <i className="fi fi-rs-box-open" />
-        <p>Shipped on Dec 24, 2023</p>
+        <p>Expédié le 24 décembre 2023</p>
         <div className={styles.verticalDivider} />
         <i className="fi fi-rs-diamond" />
-        <p>Made-to-order jewelry</p>
+        <p>Bijoux sur commande</p>
       </div>
     </div>
   );

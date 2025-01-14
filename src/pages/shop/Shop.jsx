@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import styles from "./Shop.module.scss";
 import {
   Chip,
@@ -14,16 +14,6 @@ import { products } from "../../data/data";
 export default function Shop() {
   const navigate = useNavigate();
 
-  // const filters {
-  //   "sortBy": "priceDescending",
-  //   "onlineAvailable": true,
-  //   "newArrival": true,
-  //   "categories": [
-  //       "Jewelry",
-  //       "Rings"
-  //   ]
-  // }
-
   const [filters, setFilters] = useState({
     sortBy: "recommended",
     onlineAvailable: false,
@@ -33,32 +23,32 @@ export default function Shop() {
 
   const goToHome = () => navigate("/");
 
-  // Function to filter and sort products
+  // Fonction pour filtrer et trier les produits
   const getFilteredProducts = () => {
     let filteredProducts = [...products];
 
-    // Filter by availability
+    // Filtrer par disponibilité
     if (filters.onlineAvailable) {
       filteredProducts = filteredProducts.filter(
         (product) => product.onlineAvailable
       );
     }
 
-    // Filter by new arrival
+    // Filtrer par nouveauté
     if (filters.newArrival) {
       filteredProducts = filteredProducts.filter(
         (product) => product.newArrival
       );
     }
 
-    // Filter by categories
+    // Filtrer par catégories
     if (filters.categories.length > 0) {
       filteredProducts = filteredProducts.filter((product) =>
         filters.categories.includes(product.category)
       );
     }
 
-    // Sort products
+    // Trier les produits
     if (filters.sortBy === "priceAscending") {
       filteredProducts.sort((a, b) => a.price - b.price);
     } else if (filters.sortBy === "priceDescending") {
@@ -76,7 +66,7 @@ export default function Shop() {
         <Chip
           label={
             <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-              <i className="fi fi-rr-arrow-left" /> Back to Home
+              <i className="fi fi-rr-arrow-left" /> Retour à l'accueil
             </div>
           }
           style={{ color: "#291f1e", borderColor: "#291f1e" }}
@@ -90,7 +80,7 @@ export default function Shop() {
             {filteredProducts?.length ? (
               filteredProducts.map((product) => <Product product={product} />)
             ) : (
-              <>No products found.</>
+              <>Aucun produit trouvé.</>
             )}
           </div>
         </div>
@@ -104,7 +94,13 @@ const Filters = ({
   setFilters = () => {},
   onFilterChange = () => {},
 }) => {
-  const categories = ["Jewelry", "Rings", "Necklaces", "Bracelets", "Earrings"];
+  const categories = [
+    "Bijoux",
+    "Bagues",
+    "Colliers",
+    "Bracelets",
+    "Boucles d'oreilles",
+  ];
 
   const handleFilterChange = (key, value) => {
     if (key === "categories") {
@@ -122,75 +118,75 @@ const Filters = ({
 
   return (
     <div className={styles.filters}>
-      <div>
-        <h3>Sort By</h3>
+      <div className={styles.group}>
+        <h3>Trier par</h3>
         <FormControlLabel
           control={<Radio />}
-          label="Recommended"
+          label="Recommandé"
           value="recommended"
           checked={filters.sortBy === "recommended"}
           onChange={(e) => handleFilterChange("sortBy", e.target.value)}
         />
         <FormControlLabel
           control={<Radio />}
-          label="Price Ascending"
+          label="Prix Croissant"
           value="priceAscending"
           checked={filters.sortBy === "priceAscending"}
           onChange={(e) => handleFilterChange("sortBy", e.target.value)}
         />
         <FormControlLabel
           control={<Radio />}
-          label="Price Descending"
+          label="Prix Décroissant"
           value="priceDescending"
           checked={filters.sortBy === "priceDescending"}
           onChange={(e) => handleFilterChange("sortBy", e.target.value)}
         />
       </div>
 
-      <div>
-        <h3>Filter By</h3>
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={filters.onlineAvailable}
-                onChange={(e) =>
-                  handleFilterChange("onlineAvailable", e.target.checked)
-                }
-              />
-            }
-            label="Available Online"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={filters.newArrival}
-                onChange={(e) =>
-                  handleFilterChange("newArrival", e.target.checked)
-                }
-              />
-            }
-            label="New Arrival"
-          />
-        </FormGroup>
+      <div className={styles.divider} />
+
+      <div className={styles.group}>
+        <h3>Filtrer par</h3>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={filters.onlineAvailable}
+              onChange={(e) =>
+                handleFilterChange("onlineAvailable", e.target.checked)
+              }
+            />
+          }
+          label="Disponible"
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={filters.newArrival}
+              onChange={(e) =>
+                handleFilterChange("newArrival", e.target.checked)
+              }
+            />
+          }
+          label="Nouveauté"
+        />
       </div>
 
-      <div>
-        <h3>Category</h3>
-        <FormGroup>
-          {categories.map((category) => (
-            <FormControlLabel
-              key={category}
-              control={
-                <Checkbox
-                  checked={filters.categories.includes(category)}
-                  onChange={() => handleFilterChange("categories", category)}
-                />
-              }
-              label={category}
-            />
-          ))}
-        </FormGroup>
+      <div className={styles.divider} />
+
+      <div className={styles.group}>
+        <h3>Catégorie</h3>
+        {categories.map((category) => (
+          <FormControlLabel
+            key={category}
+            control={
+              <Checkbox
+                checked={filters.categories.includes(category)}
+                onChange={() => handleFilterChange("categories", category)}
+              />
+            }
+            label={category}
+          />
+        ))}
       </div>
     </div>
   );

@@ -1,23 +1,31 @@
 import React from "react";
 import styles from "./Main.module.scss";
 import { Button } from "@mui/material";
+import { useNavigate } from "react-router";
 
 export default function Main() {
+  const navigate = useNavigate();
+
+  const onClick = () => navigate("/shop");
+
   return (
     <>
       <div className={styles.main}>
         <div className={styles.container}>
           <div className={styles.textArea}>
             <p className={styles.title}>
-              Artful mastery within each precious gem.
+              Maîtrise artistique dans chaque gemme précieuse.
             </p>
             <p className={styles.description}>
-              Each gem embodies meticulous craftsmanship, a timeless testament
-              to unparalleled skill and elegance.
+              Chaque gemme incarne un artisanat méticuleux, un témoignage
+              intemporel d'une compétence et d'une élégance inégalées.
             </p>
           </div>
-          <Button style={{ backgroundColor: "#fffcf0", color: "#291f1e" }}>
-            Discover Now
+          <Button
+            onClick={onClick}
+            style={{ backgroundColor: "#fffcf0", color: "#291f1e" }}
+          >
+            Découvrir Maintenant
           </Button>
         </div>
       </div>

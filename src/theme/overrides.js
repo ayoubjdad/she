@@ -87,10 +87,21 @@ export const theme = createTheme({
       },
     },
 
+    MuiFormControlLabel: {
+      styleOverrides: {
+        root: {
+          gap: "8px",
+          marginLeft: 0,
+          marginRight: 0,
+        },
+      },
+    },
+
     // * Radio
     MuiRadio: {
       styleOverrides: {
         root: {
+          padding: 0,
           color: palette.brown,
           "&.Mui-checked": {
             color: palette.brown,
@@ -106,6 +117,7 @@ export const theme = createTheme({
     MuiCheckbox: {
       styleOverrides: {
         root: {
+          padding: 0,
           color: palette.brown,
           "&.Mui-checked": {
             color: palette.brown,

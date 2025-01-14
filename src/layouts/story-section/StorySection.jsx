@@ -8,30 +8,30 @@ export default function StorySection() {
       <div className={styles.storySection}>
         <div className={styles.content}>
           <span>
-            Crafting timeless jewelry
+            Fabriquer des bijoux intemporels
             <img
               className={styles.image}
               src="https://www.vam.ac.uk/on/demandware.static/-/Sites-VAM_Storefront/default/dw88c1556f/images/category/jewellery/jewellery_homepage_desktop.jpg"
               alt=""
             />
-            that carries personal stories. Each piece reflects artistry and
-            soulful elegance
+            qui portent des histoires personnelles. Chaque pièce reflète un
+            savoir-faire et une élégance profonde
             <img
               className={styles.image}
               src="https://www.vam.ac.uk/on/demandware.static/-/Sites-VAM_Storefront/default/dw88c1556f/images/category/jewellery/jewellery_homepage_desktop.jpg"
               alt=""
             />
-            resonating with unique narratives. Explore our collection where
-            beauty meets emotion, revealing adornments
+            résonnant avec des récits uniques. Explorez notre collection où la
+            beauté rencontre l'émotion, dévoilant des parures
             <img
               className={styles.image}
               src="https://www.vam.ac.uk/on/demandware.static/-/Sites-VAM_Storefront/default/dw88c1556f/images/category/jewellery/jewellery_homepage_desktop.jpg"
               alt=""
             />
-            with profound tales.
+            avec des histoires profondes.
           </span>
         </div>
-        <Button>Read Our Story</Button>
+        <Button>Lire notre histoire</Button>
       </div>
 
       <div className={styles.divider} />
@@ -40,29 +40,29 @@ export default function StorySection() {
         <div className={styles.stat}>
           <h1>128</h1>
           <p>
-            Discover our collections across 128 countries, bringing our jewelry
-            closer to you, wherever you are.
+            Découvrez nos collections dans 128 pays, rapprochant nos bijoux de
+            vous, où que vous soyez.
           </p>
         </div>
         <div className={styles.stat}>
           <h1>29K</h1>
           <p>
-            Join a community of 29K and counting, where satisfaction meets
-            exquisite craftsmanship.
+            Rejoignez une communauté de 29K et plus, où la satisfaction
+            rencontre un artisanat exquis.
           </p>
         </div>
         <div className={styles.stat}>
           <h1>189+</h1>
           <p>
-            Explore a diverse range of 189 unique gemstone varieties, each
-            adding its own allure to our collection.
+            Explorez une gamme diversifiée de 189 variétés de pierres précieuses
+            uniques, chacune ajoutant son propre charme à notre collection.
           </p>
         </div>
         <div className={styles.stat}>
           <h1>20+</h1>
           <p>
-            We proudly support 20+ artisan communities worldwide, fostering
-            craftsmanship and empowerment.
+            Nous soutenons fièrement plus de 20 communautés artisanales dans le
+            monde entier, favorisant l'artisanat et l'autonomisation.
           </p>
         </div>
       </div>

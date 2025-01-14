@@ -29,37 +29,36 @@ export default function Menu() {
       <div className={styles.container}>
         <div className={styles.group}>
           <Chip
-            label="Shop"
+            label="Boutique"
             style={darkChipStyle}
             onClick={() => onClick("shop")}
           />
           <Chip
-            label="New Arrival"
+            label="Nouveautés"
             style={darkChipStyle}
             onClick={() => onClick("new")}
           />
           <Chip
-            label="Limited Offers"
+            label="Offres Limitées"
             style={darkChipStyle}
             onClick={() => onClick("limited")}
-          />
-          <Chip
-            label="About"
-            style={darkChipStyle}
-            onClick={() => onClick("about")}
           />
         </div>
         <span
           className={styles.logo}
           style={{ color: isHomePage ? "#fffcf0" : "#291f1e" }}
-          // onClick={() => (window.location.href = "/")}
           onClick={() => onClick("")}
         >
           Sorrow™
         </span>
         <div className={`${styles.group} ${styles.groupEnd}`}>
-          <Chip label="Account" style={darkChipStyle} />
-          <Chip label={`Cart (${cartLength})`} style={darkChipStyle} />
+          {/* <Chip label="Compte" style={darkChipStyle} /> */}
+          <Chip
+            label="À propos"
+            style={darkChipStyle}
+            onClick={() => onClick("about")}
+          />
+          <Chip label={`Panier (${cartLength})`} style={darkChipStyle} />
         </div>
       </div>
     </div>

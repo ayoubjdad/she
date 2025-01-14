@@ -3,27 +3,32 @@ import styles from "./BestSeller.module.scss";
 import { Button, Chip } from "@mui/material";
 import { Product } from "../../components/product/Product";
 import { products } from "../../data/data";
+import { useNavigate } from "react-router";
 
 export default function BestSeller() {
+  const navigate = useNavigate();
+
   const bestSellerProducts = products
     .filter((product) => product.isBestSeller)
     .slice(0, 4);
+
+  const onClick = () => navigate("/shop");
 
   return (
     <div className={styles.main}>
       <div className={styles.container}>
         <Chip
-          label="Best Seller Product"
+          label="Produit Best Seller"
           style={{ color: "#291f1e", borderColor: "#291f1e" }}
         />
         <div className={styles.title}>
-          <h1>Crafted by Master artisans.</h1>
+          <h1>Fabriqué par des artisans maîtres.</h1>
           <p>
-            Expertly crafted by skilled artisans, ensuring every piece reflects
-            true mastery.
+            Habilement fabriqué par des artisans qualifiés, garantissant que
+            chaque pièce reflète un véritable savoir-faire.
           </p>
         </div>
-        <Button>View All Products</Button>
+        <Button onClick={onClick}>Voir tous les produits</Button>
 
         <div className={styles.products}>
           {bestSellerProducts.map((product) => (

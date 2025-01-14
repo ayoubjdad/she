@@ -3,18 +3,22 @@ import styles from "./Footer.module.scss";
 import { Button, Chip, TextField } from "@mui/material";
 
 export default function Footer() {
+  const handleClick = (link) => {
+    window.open(`https://www.${link}`, "_blank");
+  };
+
   return (
     <>
       <div className={styles.main}>
         <div className={styles.container}>
           <h1>
-            Get exclusive access to jewelry trends, insider stories by
-            Subscribing to our newsletter.
+            Obtenez un accès exclusif aux tendances de bijoux et aux histoires
+            d'initiés en vous abonnant à notre newsletter.
           </h1>
 
           <div className={styles.email}>
-            <TextField placeholder="Enter your email" variant="outlined" />
-            <Button>Subscribe</Button>
+            <TextField placeholder="Entrez votre email" variant="outlined" />
+            <Button>S'abonner</Button>
           </div>
         </div>
       </div>
@@ -22,12 +26,22 @@ export default function Footer() {
       <div className={styles.copyright}>
         <Chip label="Copyright © 2022 She Jewelry" />
         <div className={styles.pages}>
-          <Chip label="Shop" />
-          <Chip label="Privacy Policy" />
-          <Chip label="Terms of service" />
+          <Chip label="Boutique" />
+          <Chip label="Politique de confidentialité" />
+          <Chip label="Conditions d'utilisation" />
           <div className={styles.divider} />
-          <Chip label="Instagram" />
-          <Chip label="Facebook" />
+          <Chip
+            label="Instagram"
+            onClick={() => {
+              handleClick("instagram.com");
+            }}
+          />
+          <Chip
+            label="Facebook"
+            onClick={() => {
+              handleClick("facebook.com");
+            }}
+          />
         </div>
       </div>
     </>

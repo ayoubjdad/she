@@ -15,7 +15,7 @@ export default function Header() {
       }}
     >
       <span className={styles.text}>
-        <i className="fi fi-rs-box-check" /> FREE SHIPPING ON ORDERS OVER 1000
+        <i className="fi fi-rs-box-check" /> LIVRAISON GRATUITE A PARTIR DE 500
         DH
       </span>
     </div>

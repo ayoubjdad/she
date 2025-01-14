@@ -31,3 +31,13 @@
   height: fit-content;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
+
+.group {
+  gap: 8px;
+  display: grid;
+}
+
+.divider {
+  border-top: 1px solid #dcd9cd;
+  width: 100%;
+}
