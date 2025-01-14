@@ -85,3 +85,14 @@
     background-position: center;
   }
 }
+
+.shopDetails {
+  gap: 16px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.shopDetailContainer {
+  gap: 16px;
+  display: grid;
+}

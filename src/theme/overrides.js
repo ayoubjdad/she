@@ -76,6 +76,9 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: 0,
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#291f1e",
+          },
         },
         input: {
           fontFamily: "Core Sans AR45",

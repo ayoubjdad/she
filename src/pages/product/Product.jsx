@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Product.module.scss";
-import { Button, Chip } from "@mui/material";
+import { Button, Chip, TextField } from "@mui/material";
 import { Product as SingleProduct } from "../../components/product/Product";
 import { useLocation, useNavigate } from "react-router";
 import { products } from "../../data/data";
@@ -83,6 +83,8 @@ const AddToCart = ({ product, setCart, addToCart = () => {} }) => {
   const { id, name, material, price } = product;
   const chipStyle = { color: "#291f1e", borderColor: "#291f1e" };
 
+  const [shopDetails, setShopDetails] = useState({ quantity: 1, coupon: "" });
+
   return (
     <div className={styles.addToCart}>
       <Chip label="New Arrival" style={chipStyle} />
@@ -93,23 +95,26 @@ const AddToCart = ({ product, setCart, addToCart = () => {} }) => {
 
       <div className={styles.divider} />
 
-      <div style={{ display: "grid", gap: "16px" }}>
-        <h3>Color*</h3>
-        <div style={{ display: "flex", gap: "8px" }}>
-          <Chip label="Yellow" style={chipStyle} />
-          <Chip label="White" style={chipStyle} />
-          <Chip label="Rose Gold" style={chipStyle} />
+      <div className={styles.shopDetails}>
+        <div className={styles.shopDetailContainer}>
+          <h3>Quantité</h3>
+          <TextField
+            type="number"
+            value={shopDetails.quantity}
+            onChange={(e) =>
+              setShopDetails({ ...shopDetails, quantity: e.target.value })
+            }
+            style={{ width: "100%" }}
+          />
         </div>
-      </div>
 
-      <div style={{ display: "grid", gap: "16px" }}>
-        <h3>Style*</h3>
-        <div style={{ display: "flex", gap: "8px" }}>
-          <Chip label="Yellow" style={chipStyle} />
-          <Chip label="White" style={chipStyle} />
-          <Chip label="Rose Gold" style={chipStyle} />
-          <Chip label="White" style={chipStyle} />
-          <Chip label="Rose Gold" style={chipStyle} />
+        <div className={styles.shopDetailContainer}>
+          <h3>Coupon de réduction</h3>
+          <TextField
+            value={shopDetails.coupon}
+            onChange={(e) => setShopDetails(e.target.value)}
+            style={{ width: "100%" }}
+          />
         </div>
       </div>
 
