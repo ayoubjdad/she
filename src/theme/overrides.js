@@ -20,6 +20,7 @@ export const theme = createTheme({
     },
   },
   components: {
+    // * Chip
     MuiChip: {
       styleOverrides: {
         root: {
@@ -44,6 +45,7 @@ export const theme = createTheme({
       },
     },
 
+    // * Button
     MuiButton: {
       styleOverrides: {
         root: {
@@ -62,6 +64,7 @@ export const theme = createTheme({
       },
     },
 
+    // * TextField
     MuiTextField: {
       styleOverrides: {
         root: {
@@ -77,6 +80,36 @@ export const theme = createTheme({
         input: {
           fontFamily: "Core Sans AR45",
           padding: "12px",
+        },
+      },
+    },
+
+    // * Radio
+    MuiRadio: {
+      styleOverrides: {
+        root: {
+          color: palette.brown,
+          "&.Mui-checked": {
+            color: palette.brown,
+          },
+          "&.Mui-checked + .MuiFormControlLabel-label": {
+            color: palette.brown,
+          },
+        },
+      },
+    },
+
+    // * Checkbox
+    MuiCheckbox: {
+      styleOverrides: {
+        root: {
+          color: palette.brown,
+          "&.Mui-checked": {
+            color: palette.brown,
+          },
+          "&.Mui-checked + .MuiFormControlLabel-label": {
+            color: palette.brown,
+          },
         },
       },
     },

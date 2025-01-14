@@ -7,6 +7,7 @@ import Home from "./pages/home/Home";
 import { theme } from "./theme/overrides";
 import Footer from "./layouts/footer/Footer";
 import Product from "./pages/product/Product";
+import Shop from "./pages/shop/Shop";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/product" element={<Product />} />
+          <Route path="/shop" element={<Shop />} />
         </Routes>
         <Footer />
       </Router>

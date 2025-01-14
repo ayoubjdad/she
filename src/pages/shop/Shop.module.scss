@@ -1,0 +1,33 @@
+.main {
+  padding: 100px 80px 80px;
+  background-color: #fffcf0;
+}
+
+.container {
+  gap: 32px;
+  display: grid;
+}
+
+.shop {
+  gap: 32px;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+
+.filters {
+  gap: 16px;
+  display: grid;
+  height: fit-content;
+
+  h3 {
+    font-size: 16px;
+    color: #291f1e;
+  }
+}
+
+.products {
+  gap: 16px;
+  display: grid;
+  height: fit-content;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}

@@ -4,13 +4,14 @@ import { useLocation } from "react-router";
 
 export default function Header() {
   const { pathname } = useLocation();
+  const isHomePage = pathname === "/";
 
   return (
     <div
       className={styles.main}
       style={{
-        color: pathname === "/product" ? "#fffcf0" : "#291f1e",
-        backgroundColor: pathname === "/product" ? "#291f1e" : "#fffcf0",
+        color: !isHomePage ? "#fffcf0" : "#291f1e",
+        backgroundColor: !isHomePage ? "#291f1e" : "#fffcf0",
       }}
     >
       <span className={styles.text}>
