@@ -128,5 +128,18 @@ export const theme = createTheme({
         },
       },
     },
+
+    // *  Drawer
+    MuiDrawer: {
+      styleOverrides: {
+        paper: {
+          width: 320,
+          padding: "16px",
+          boxShadow: "none",
+          color: palette.brown,
+          backgroundColor: palette.cream,
+        },
+      },
+    },
   },
 });

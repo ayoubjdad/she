@@ -29,3 +29,23 @@
 .groupEnd {
   justify-content: flex-end;
 }
+
+.cartContainer {
+  gap: 16px;
+  display: grid;
+}
+
+.cartItem {
+  gap: 16px;
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.cartItemInfos {
+  display: grid;
+}
