@@ -1,9 +1,28 @@
 import React from "react";
 import styles from "./Product.module.scss";
 import { Button, Chip } from "@mui/material";
-import { Product as SingleProduct } from "../../layouts/best-seller/BestSeller";
+import { Product as SingleProduct } from "../../components/product/Product";
+import { useLocation, useNavigate } from "react-router";
+import { products } from "../../data/data";
+import { useCart } from "../../context/CartProvider";
 
 export default function Product() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { addToCart } = useCart();
+
+  const { product = {} } = location.state || {};
+
+  if (!product) {
+    return <p>No product data available.</p>;
+  }
+
+  const recommendations = products.filter(
+    (pro) => pro.category === product.category
+  );
+
+  const goToHome = () => navigate("/");
+
   return (
     <div className={styles.main}>
       <div className={styles.container}>
@@ -13,104 +32,64 @@ export default function Product() {
               <i className="fi fi-rr-arrow-left" /> Back to Home
             </div>
           }
-          style={{ color: "#291f1e", borderColor: "#291f1e" }}
+          style={{
+            color: "#291f1e",
+            borderColor: "#291f1e",
+            cursor: "pointer",
+          }}
+          onClick={goToHome} // Handle click to redirect
         />
 
         <div className={styles.product}>
-          <Details />
-          <AddToCart />
+          <Details product={product} />
+          <AddToCart product={product} addToCart={addToCart} />
         </div>
 
         <div className={styles.divider} />
 
         <h1>Recommendations</h1>
         <div className={styles.products}>
-          <SingleProduct />
-          <SingleProduct />
-          <SingleProduct />
-          <SingleProduct />
+          {recommendations.slice(0, 4).map((product) => (
+            <SingleProduct product={product} />
+          ))}
         </div>
       </div>
     </div>
   );
 }
 
-const Details = ({ title, price, image }) => {
+const Details = ({ product }) => {
+  const { image, description } = product;
+
   return (
     <div className={styles.details}>
       <div className={styles.images}>
-        <div
-          style={{
-            backgroundImage:
-              "url(https://i.pinimg.com/736x/d2/4a/ac/d24aacaaabb9d0ace6a9f8e0f39b186e.jpg)",
-          }}
-        />
+        <div style={{ backgroundImage: `url(${image})` }} />
         <div className={styles.smallImages}>
-          <div
-            style={{
-              backgroundImage:
-                "url(https://i.pinimg.com/736x/d2/4a/ac/d24aacaaabb9d0ace6a9f8e0f39b186e.jpg)",
-            }}
-          />
-          <div
-            style={{
-              backgroundImage:
-                "url(https://i.pinimg.com/736x/d2/4a/ac/d24aacaaabb9d0ace6a9f8e0f39b186e.jpg)",
-            }}
-          />
-          <div
-            style={{
-              backgroundImage:
-                "url(https://i.pinimg.com/736x/d2/4a/ac/d24aacaaabb9d0ace6a9f8e0f39b186e.jpg)",
-            }}
-          />
+          <div style={{ backgroundImage: `url(${image})` }} />
+          <div style={{ backgroundImage: `url(${image})` }} />
+          <div style={{ backgroundImage: `url(${image})` }} />
         </div>
       </div>
 
       <h3>Detailed Information</h3>
 
-      <p className={styles.description}>
-        Experience sophistication and expert craftsmanship with our Sorrowela
-        Earrings. Crafted from solid 14k gold, each pair offers a choice of a
-        sleek 2.00 mm width and a substantial 1.60 mm thickness. Available in
-        yellow, white, or rose gold, these earrings exude timeless elegance
-        tailored to your style. Elevate every moment with the enduring beauty
-        and meticulous craftsmanship embodied in our Sorrowela Earrings.
-      </p>
-      <p className={styles.description}>
-        Crafted from solid 14k gold in yellow,1.60 mm thickness. Available in
-        yellow, white, or rose gold, these earrings exude timeless elegance
-        tailored to your style. Elevate every moment with the enduring beauty
-        and meticulous craftsmanship embodied in our Sorrowela Earrings. white,
-        or rose hues, exuding timeless elegance and these earrings elevate your
-        style.
-      </p>
-      <p className={styles.description}>
-        Crafted from sol1.yle. Elevate every moment with the enduring beauty and
-        meticulous craftsmanship embodied in our Sorrowela Earrings.id 14k gold
-        in yellow, white, or rose hues, exuding timeless elegance and these
-        earrings elevate your style.
-      </p>
+      <p className={styles.description}>{description}</p>
     </div>
   );
 };
 
-const AddToCart = () => {
-  const chipStyle = {
-    color: "#291f1e",
-    borderColor: "#291f1e",
-  };
+const AddToCart = ({ product, setCart, addToCart = () => {} }) => {
+  const { id, name, material, price } = product;
+  const chipStyle = { color: "#291f1e", borderColor: "#291f1e" };
 
   return (
     <div className={styles.addToCart}>
       <Chip label="New Arrival" style={chipStyle} />
 
-      <h1>Sorrowela Earrings</h1>
-      <p>218 DH</p>
-      <p className={styles.description}>
-        Crafted from solid 14k gold in yellow, white, or rose hues, exuding
-        timeless elegance and these earrings elevate your style.
-      </p>
+      <h1>{name}</h1>
+      <p>{price} DH</p>
+      <p className={styles.description}>{material}</p>
 
       <div className={styles.divider} />
 
@@ -134,7 +113,9 @@ const AddToCart = () => {
         </div>
       </div>
 
-      <Button style={{ width: "100%" }}>Add to Cart</Button>
+      <Button style={{ width: "100%" }} onClick={() => addToCart(product, 1)}>
+        Add to Cart
+      </Button>
 
       <div className={styles.infos}>
         <i className="fi fi-rs-shield-check" />

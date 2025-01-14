@@ -1,8 +1,14 @@
 import React from "react";
 import styles from "./BestSeller.module.scss";
 import { Button, Chip } from "@mui/material";
+import { Product } from "../../components/product/Product";
+import { products } from "../../data/data";
 
 export default function BestSeller() {
+  const bestSellerProducts = products
+    .filter((product) => product.isBestSeller)
+    .slice(0, 4);
+
   return (
     <div className={styles.main}>
       <div className={styles.container}>
@@ -20,34 +26,11 @@ export default function BestSeller() {
         <Button>View All Products</Button>
 
         <div className={styles.products}>
-          <Product />
-          <Product />
-          <Product />
-          <Product />
+          {bestSellerProducts.map((product) => (
+            <Product product={product} />
+          ))}
         </div>
       </div>
     </div>
   );
 }
-
-export const Product = ({ title, price, image }) => {
-  return (
-    <div className={styles.productCard}>
-      <div
-        className={styles.imageContainer}
-        style={{
-          background: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1)), url("https://i.pinimg.com/736x/d2/4a/ac/d24aacaaabb9d0ace6a9f8e0f39b186e.jpg")`,
-        }}
-      >
-        <Chip label="New Arrival" />
-      </div>
-      <div className={styles.productContainer}>
-        <div>
-          <h3>Sorroewela Earrings</h3>
-          <p className={styles.material}>Gold Vermeil</p>
-        </div>
-        <p className={styles.price}>218 DH</p>
-      </div>
-    </div>
-  );
-};

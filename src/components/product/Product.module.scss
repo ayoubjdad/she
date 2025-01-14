@@ -1,0 +1,53 @@
+.productCard {
+  width: 300px;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    .imageContainer {
+      div {
+        border: none;
+        color: #291f1e;
+        background-color: #fffcf0;
+      }
+    }
+
+    .productContainer div h3 {
+      text-decoration: underline;
+    }
+
+    .material {
+    }
+
+    .price {
+    }
+  }
+}
+
+.imageContainer {
+  height: 300px;
+  padding: 12px;
+  cursor: pointer;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+.productContainer {
+  gap: 12px;
+  display: grid;
+  padding: 15px 0;
+}
+
+.productContainer div h3 {
+  cursor: pointer;
+}
+
+.material {
+  font-family: Core Sans AR45;
+  font-size: 12px;
+}
+
+.price {
+  font-size: 14px;
+  font-weight: 700;
+}

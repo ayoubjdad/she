@@ -2,10 +2,13 @@ import React from "react";
 import styles from "./Menu.module.scss";
 import { Chip } from "@mui/material";
 import { useLocation } from "react-router";
+import { useCart } from "../../context/CartProvider";
 
 export default function Menu() {
   const { pathname } = useLocation();
+  const { cart } = useCart();
 
+  const cartLength = cart?.length || 0;
   const darkChipStyle =
     pathname === "/product"
       ? {
@@ -39,7 +42,7 @@ export default function Menu() {
         </span>
         <div className={`${styles.group} ${styles.groupEnd}`}>
           <Chip label="Account" style={darkChipStyle} />
-          <Chip label="Cart (0)" style={darkChipStyle} />
+          <Chip label={`Cart (${cartLength})`} style={darkChipStyle} />
         </div>
       </div>
     </div>

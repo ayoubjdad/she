@@ -13,7 +13,10 @@ export default function Header() {
         backgroundColor: pathname === "/product" ? "#291f1e" : "#fffcf0",
       }}
     >
-      <span className={styles.text}>FREE SHIPPING ON ORDERS OVER 1000 DH</span>
+      <span className={styles.text}>
+        <i className="fi fi-rs-box-check" /> FREE SHIPPING ON ORDERS OVER 1000
+        DH
+      </span>
     </div>
   );
 }
