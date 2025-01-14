@@ -17,7 +17,10 @@ export default function Menu() {
 
   const [open, setOpen] = useState(false);
 
-  const onClick = (link) => navigate(`/${link}`);
+  const onClick = (link) => {
+    navigate(`/${link}`);
+    setOpen(false);
+  };
 
   return (
     <>
@@ -25,7 +28,7 @@ export default function Menu() {
         open={open}
         setOpen={setOpen}
         cartItems={cart}
-        onClick={() => {}}
+        onClick={onClick}
       />
 
       <div

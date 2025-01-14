@@ -8,6 +8,7 @@ import { theme } from "./theme/overrides";
 import Footer from "./layouts/footer/Footer";
 import Product from "./pages/product/Product";
 import Shop from "./pages/shop/Shop";
+import Checkout from "./pages/checkout/Checkout";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/product" element={<Product />} />
           <Route path="/shop" element={<Shop />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Routes>
         <Footer />
       </Router>

@@ -1,0 +1,53 @@
+.main {
+  padding: 100px 80px 80px 80px;
+  background-color: #fffcf0;
+}
+
+.container {
+  gap: 32px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.infos {
+  gap: 16px;
+  display: grid;
+}
+
+.address {
+  gap: 16px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+
+.cartContainer {
+  gap: 16px;
+  display: grid;
+}
+
+.cart {
+  gap: 16px;
+  display: grid;
+  height: fit-content;
+}
+
+.cartItem {
+  gap: 16px;
+  display: flex;
+  height: fit-content;
+  align-items: center;
+
+  img {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.cartItemInfos {
+  display: grid;
+}
+
+.cartContainer {
+  padding: 32px;
+  background-color: #f1edde;
+}
