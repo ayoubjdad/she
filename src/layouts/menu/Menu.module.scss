@@ -35,6 +35,24 @@
   display: grid;
 }
 
+.cartHeader {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cartItemContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  i {
+    color: red;
+    cursor: pointer;
+  }
+}
+
 .cartItem {
   gap: 16px;
   display: flex;

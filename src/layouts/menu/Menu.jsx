@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import styles from "./Menu.module.scss";
-import { Button, Chip, Divider, Drawer } from "@mui/material";
+import { Box, Button, Chip, Divider, Drawer } from "@mui/material";
 import { useLocation, useNavigate } from "react-router";
 import { useCart } from "../../context/CartProvider";
 
 export default function Menu() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const { cart } = useCart();
+  const { cart, removeFromCart } = useCart();
 
   const cartLength = cart?.length || 0;
   const isHomePage = pathname === "/";
@@ -16,6 +16,10 @@ export default function Menu() {
     : {};
 
   const [open, setOpen] = useState(false);
+
+  const onOpen = () => setOpen(true);
+
+  const onClose = () => setOpen(false);
 
   const onClick = (link) => {
     navigate(`/${link}`);
@@ -29,6 +33,8 @@ export default function Menu() {
         setOpen={setOpen}
         cartItems={cart}
         onClick={onClick}
+        onClose={onClose}
+        onRemove={removeFromCart}
       />
 
       <div
@@ -74,7 +80,7 @@ export default function Menu() {
             <Chip
               label={`Panier (${cartLength})`}
               style={darkChipStyle}
-              onClick={() => setOpen(true)}
+              onClick={onOpen}
             />
           </div>
         </div>
@@ -85,57 +91,63 @@ export default function Menu() {
 
 const CartDrawer = ({
   open,
-  setOpen = () => {},
   cartItems = [],
   onClick = () => {},
+  onClose = () => {},
+  onRemove = () => {},
 }) => {
-  console.log(":::::: ~ cartItems:", cartItems);
-  if (!cartItems?.length) {
-    return (
-      <Drawer open={open} onClose={() => setOpen(false)} anchor="right">
-        <div className={styles.cartContainer}>
+  return (
+    <Drawer open={open} onClose={onClose} anchor="right">
+      <div className={styles.cartContainer}>
+        <div className={styles.cartHeader}>
           <h2>Panier</h2>
+          <Box component="i" className="fi fi-bs-cross" onClick={onClose} />
+        </div>
+
+        {!cartItems?.length ? (
           <div className={styles.emptyCart}>
             <p>Votre panier est vide.</p>
           </div>
-        </div>
-      </Drawer>
-    );
-  }
+        ) : (
+          <>
+            {cartItems.map((item, index) => (
+              <div key={index} className={styles.cartItemContainer}>
+                <div className={styles.cartItem}>
+                  <img src={item.image} alt="" />
+                  <div className={styles.cartItemInfos}>
+                    <span>{item.name}</span>
+                    <span>
+                      {item.quantity} x {item.price} DH
+                    </span>
+                  </div>
+                </div>
 
-  return (
-    <Drawer open={open} onClose={() => setOpen(false)} anchor="right">
-      <div className={styles.cartContainer}>
-        <h2>Panier</h2>
+                <Box
+                  component="i"
+                  className="fi fi-rs-trash"
+                  onClick={() => onRemove(item.id)}
+                />
+              </div>
+            ))}
 
-        {cartItems.map((item, index) => (
-          <div key={index} className={styles.cartItem}>
-            <img src={item.image} alt="" />
-            <div className={styles.cartItemInfos}>
-              <span>{item.name}</span>
+            <Divider />
+
+            <div className={styles.cartTotal}>
+              <span>Total: </span>
               <span>
-                {item.quantity} x {item.price} DH
+                {cartItems.reduce(
+                  (total, item) => total + item.price * item.quantity,
+                  0
+                )}{" "}
+                DH
               </span>
             </div>
-          </div>
-        ))}
 
-        <Divider />
-
-        <div className={styles.cartTotal}>
-          <span>Total: </span>
-          <span>
-            {cartItems.reduce(
-              (total, item) => total + item.price * item.quantity,
-              0
-            )}{" "}
-            DH
-          </span>
-        </div>
-
-        <Button onClick={() => onClick("checkout")}>
-          Procéder au paiement
-        </Button>
+            <Button onClick={() => onClick("checkout")}>
+              Procéder au paiement
+            </Button>
+          </>
+        )}
       </div>
     </Drawer>
   );
