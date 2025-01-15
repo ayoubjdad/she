@@ -89,6 +89,7 @@ const CartDrawer = ({
   cartItems = [],
   onClick = () => {},
 }) => {
+  console.log(":::::: ~ cartItems:", cartItems);
   if (!cartItems?.length) {
     return (
       <Drawer open={open} onClose={() => setOpen(false)} anchor="right">

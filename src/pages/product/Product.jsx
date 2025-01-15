@@ -126,7 +126,7 @@ const AddToCart = ({ product, setCart, addToCart = () => {} }) => {
             border: "1px solid #291f1e",
             backgroundColor: "transparent",
           }}
-          onClick={() => addToCart(product, 1)}
+          onClick={() => addToCart(product, Number(shopDetails.quantity))}
         >
           Ajouter au panier
         </Button>

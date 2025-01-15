@@ -1,12 +1,12 @@
 .main {
-  padding: 100px 80px 80px 80px;
-  background-color: #fffcf0;
-}
-
-.container {
   gap: 32px;
   display: grid;
+  background-color: #fffcf0;
   grid-template-columns: repeat(2, 1fr);
+}
+
+.formInfos {
+  padding: 120px 80px 80px 80px;
 }
 
 .infos {
@@ -23,6 +23,9 @@
 .cartContainer {
   gap: 16px;
   display: grid;
+  padding: 32px;
+  background-color: #f1edde;
+  padding: 120px 80px 80px 80px;
 }
 
 .cart {
@@ -47,7 +50,8 @@
   display: grid;
 }
 
-.cartContainer {
-  padding: 32px;
-  background-color: #f1edde;
+.cartTotal {
+  gap: 16px;
+  display: grid;
+  margin-top: 40px;
 }

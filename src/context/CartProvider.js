@@ -52,13 +52,78 @@ const cartReducer = (state, action) => {
 
 // Initial state for the cart
 const initialCartState = {
-  items: [],
+  items: [
+    {
+      id: 2,
+      name: "Silver Bracelet",
+      material: "Sterling Silver",
+      price: 1200,
+      image:
+        "https://i.pinimg.com/736x/d2/4a/ac/d24aacaaabb9d0ace6a9f8e0f39b186e.jpg",
+      description:
+        "This sterling silver bracelet is the epitome of elegance and sophistication. Featuring a polished finish that gleams beautifully in the light, it is designed for versatility, making it ideal for both casual and formal settings. The intricate detailing and secure clasp add a touch of refinement to its minimalist aesthetic, ensuring it becomes a cherished addition to any jewelry collection.",
+      category: "Bracelets",
+      isBestSeller: true,
+      quantity: 1,
+    },
+    {
+      id: 2,
+      name: "Silver Bracelet",
+      material: "Sterling Silver",
+      price: 1200,
+      image:
+        "https://i.pinimg.com/736x/d2/4a/ac/d24aacaaabb9d0ace6a9f8e0f39b186e.jpg",
+      description:
+        "This sterling silver bracelet is the epitome of elegance and sophistication. Featuring a polished finish that gleams beautifully in the light, it is designed for versatility, making it ideal for both casual and formal settings. The intricate detailing and secure clasp add a touch of refinement to its minimalist aesthetic, ensuring it becomes a cherished addition to any jewelry collection.",
+      category: "Bracelets",
+      isBestSeller: true,
+      quantity: 1,
+    },
+    {
+      id: 2,
+      name: "Silver Bracelet",
+      material: "Sterling Silver",
+      price: 1200,
+      image:
+        "https://i.pinimg.com/736x/d2/4a/ac/d24aacaaabb9d0ace6a9f8e0f39b186e.jpg",
+      description:
+        "This sterling silver bracelet is the epitome of elegance and sophistication. Featuring a polished finish that gleams beautifully in the light, it is designed for versatility, making it ideal for both casual and formal settings. The intricate detailing and secure clasp add a touch of refinement to its minimalist aesthetic, ensuring it becomes a cherished addition to any jewelry collection.",
+      category: "Bracelets",
+      isBestSeller: true,
+      quantity: 1,
+    },
+    {
+      id: 2,
+      name: "Silver Bracelet",
+      material: "Sterling Silver",
+      price: 1200,
+      image:
+        "https://i.pinimg.com/736x/d2/4a/ac/d24aacaaabb9d0ace6a9f8e0f39b186e.jpg",
+      description:
+        "This sterling silver bracelet is the epitome of elegance and sophistication. Featuring a polished finish that gleams beautifully in the light, it is designed for versatility, making it ideal for both casual and formal settings. The intricate detailing and secure clasp add a touch of refinement to its minimalist aesthetic, ensuring it becomes a cherished addition to any jewelry collection.",
+      category: "Bracelets",
+      isBestSeller: true,
+      quantity: 1,
+    },
+    {
+      id: 2,
+      name: "Silver Bracelet",
+      material: "Sterling Silver",
+      price: 1200,
+      image:
+        "https://i.pinimg.com/736x/d2/4a/ac/d24aacaaabb9d0ace6a9f8e0f39b186e.jpg",
+      description:
+        "This sterling silver bracelet is the epitome of elegance and sophistication. Featuring a polished finish that gleams beautifully in the light, it is designed for versatility, making it ideal for both casual and formal settings. The intricate detailing and secure clasp add a touch of refinement to its minimalist aesthetic, ensuring it becomes a cherished addition to any jewelry collection.",
+      category: "Bracelets",
+      isBestSeller: true,
+      quantity: 1,
+    },
+  ],
 };
 
 // CartProvider component
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialCartState);
-  console.log(":::::: ~ state:", state);
 
   // Add product to cart
   const addToCart = (product, quantity = 1) => {
