@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./Header.module.scss";
 import { useLocation } from "react-router";
 
@@ -10,8 +9,8 @@ export default function Header() {
     <div
       className={styles.main}
       style={{
-        color: !isHomePage ? "#fffcf0" : "#291f1e",
-        backgroundColor: !isHomePage ? "#291f1e" : "#fffcf0",
+        color: !isHomePage ? "#fffcf0" : "#231918",
+        backgroundColor: !isHomePage ? "#231918" : "#fffcf0",
       }}
     >
       <span className={styles.text}>

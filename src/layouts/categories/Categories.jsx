@@ -8,7 +8,7 @@ export default function Categories() {
       <div className={styles.container}>
         <Chip
           label="Notre expertise"
-          style={{ color: "#291f1e", borderColor: "#291f1e" }}
+          style={{ color: "#231918", borderColor: "#231918" }}
         />
         <h1 className={styles.title}>
           Créations mettant en valeur un éventail de Gemmes éclatantes.

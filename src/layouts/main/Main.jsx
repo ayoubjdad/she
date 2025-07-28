@@ -23,7 +23,7 @@ export default function Main() {
           </div>
           <Button
             onClick={onClick}
-            style={{ backgroundColor: "#fffcf0", color: "#291f1e" }}
+            style={{ backgroundColor: "#fffcf0", color: "#231918" }}
           >
             Découvrir Maintenant
           </Button>

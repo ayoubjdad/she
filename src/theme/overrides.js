@@ -2,8 +2,11 @@ import { createTheme } from "@mui/material/styles";
 
 export const palette = {
   cream: "#fffcf0",
-  green: "#c8d6b4",
-  brown: "#291f1e",
+  light: "#f3d9b3",
+  gold: "#edc483",
+  dark: "#52131f",
+  main: "#781428",
+  black: "#231918",
 };
 
 export const theme = createTheme({
@@ -56,7 +59,7 @@ export const theme = createTheme({
           borderRadius: "50px",
           textTransform: "none",
           minWidth: "fit-content",
-          backgroundColor: "#291f1e",
+          backgroundColor: "#231918",
           "&:hover": {
             backgroundColor: "#3a2c2b",
           },
@@ -77,7 +80,7 @@ export const theme = createTheme({
         root: {
           borderRadius: 0,
           "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            borderColor: "#291f1e",
+            borderColor: "#231918",
           },
         },
         input: {

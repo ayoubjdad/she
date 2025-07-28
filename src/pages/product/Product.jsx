@@ -33,8 +33,8 @@ export default function Product() {
             </div>
           }
           style={{
-            color: "#291f1e",
-            borderColor: "#291f1e",
+            color: "#231918",
+            borderColor: "#231918",
             cursor: "pointer",
           }}
           onClick={goToHome} // Gérer le clic pour rediriger
@@ -81,7 +81,7 @@ const Details = ({ product }) => {
 
 const AddToCart = ({ product, setCart, addToCart = () => {} }) => {
   const { id, name, material, price } = product;
-  const chipStyle = { color: "#291f1e", borderColor: "#291f1e" };
+  const chipStyle = { color: "#231918", borderColor: "#231918" };
 
   const [shopDetails, setShopDetails] = useState({ quantity: 1, coupon: "" });
 
@@ -122,8 +122,8 @@ const AddToCart = ({ product, setCart, addToCart = () => {} }) => {
         <Button
           style={{
             width: "100%",
-            color: "#291f1e",
-            border: "1px solid #291f1e",
+            color: "#231918",
+            border: "1px solid #231918",
             backgroundColor: "transparent",
           }}
           onClick={() => addToCart(product, Number(shopDetails.quantity))}

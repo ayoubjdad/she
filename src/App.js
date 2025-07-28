@@ -9,6 +9,8 @@ import Footer from "./layouts/footer/Footer";
 import Product from "./pages/product/Product";
 import Shop from "./pages/shop/Shop";
 import Checkout from "./pages/checkout/Checkout";
+import PrivacyTerms from "./pages/privacy-terms/PrivacyTerms";
+import GeneralConditions from "./pages/general-conditions/GeneralConditions";
 
 function App() {
   return (
@@ -21,6 +23,11 @@ function App() {
           <Route path="/product" element={<Product />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route
+            path="/politique-de-confidentialite"
+            element={<PrivacyTerms />}
+          />
+          <Route path="/conditions-generales" element={<GeneralConditions />} />
         </Routes>
         <Footer />
       </Router>

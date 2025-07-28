@@ -19,7 +19,7 @@ export default function BestSeller() {
       <div className={styles.container}>
         <Chip
           label="Produit Best Seller"
-          style={{ color: "#291f1e", borderColor: "#291f1e" }}
+          style={{ color: "#231918", borderColor: "#231918" }}
         />
         <div className={styles.title}>
           <h1>Fabriqué par des artisans maîtres.</h1>

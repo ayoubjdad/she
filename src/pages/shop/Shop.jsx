@@ -69,7 +69,7 @@ export default function Shop() {
               <i className="fi fi-rr-arrow-left" /> Retour à l'accueil
             </div>
           }
-          style={{ color: "#291f1e", borderColor: "#291f1e" }}
+          style={{ color: "#231918", borderColor: "#231918" }}
           onClick={goToHome}
         />
 
