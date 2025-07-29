@@ -4,6 +4,7 @@ export const products = [
     name: "Golden Necklace",
     material: "24K Gold",
     price: 45.0,
+    promoPrice: 39.0,
     image:
       "https://i.pinimg.com/736x/d2/4a/ac/d24aacaaabb9d0ace6a9f8e0f39b186e.jpg",
     description:
@@ -17,6 +18,7 @@ export const products = [
     name: "Silver Bracelet",
     material: "Sterling Silver",
     price: 12.0,
+    promoPrice: 9.5,
     image:
       "https://i.pinimg.com/736x/d2/4a/ac/d24aacaaabb9d0ace6a9f8e0f39b186e.jpg",
     description:
@@ -30,6 +32,7 @@ export const products = [
     name: "Diamond Earrings",
     material: "18K Gold with Diamonds",
     price: 65.0,
+    promoPrice: 55.0,
     image:
       "https://i.pinimg.com/736x/d2/4a/ac/d24aacaaabb9d0ace6a9f8e0f39b186e.jpg",
     description:
@@ -173,6 +176,7 @@ export const products = [
     name: "Emerald Bracelet",
     material: "Sterling Silver with Emerald",
     price: 42.0,
+    promoPrice: 35.0,
     image:
       "https://i.pinimg.com/736x/d2/4a/ac/d24aacaaabb9d0ace6a9f8e0f39b186e.jpg",
     description:

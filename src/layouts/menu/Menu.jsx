@@ -82,7 +82,7 @@ export default function Menu() {
             <Chip
               label="Promos"
               style={darkChipStyle}
-              onClick={() => onClick("limited")}
+              onClick={() => onClick("promotions")}
             />
             <Chip
               label={`Panier (${cartLength})`}

@@ -4,7 +4,16 @@ import { Chip } from "@mui/material";
 import { useNavigate } from "react-router";
 
 export const Product = ({ product = {} }) => {
-  const { id, name, material, price, image, description, category } = product;
+  const {
+    id,
+    name,
+    material,
+    price,
+    image,
+    description,
+    category,
+    promoPrice,
+  } = product;
   const navigate = useNavigate();
 
   const onClick = () => {
@@ -20,13 +29,32 @@ export const Product = ({ product = {} }) => {
         }}
       >
         <Chip label={category} />
+        {promoPrice && (
+          <Chip
+            style={{
+              marginLeft: 8,
+              border: "none",
+              color: "#fff",
+              backgroundColor: "#781428",
+            }}
+            label={`-${Math.round(((price - promoPrice) / price) * 100)}%`}
+          />
+        )}
       </div>
       <div className={styles.productContainer}>
         <div>
           <h3>{name}</h3>
           <p className={styles.material}>{material}</p>
         </div>
-        <p className={styles.price}>{price} DH</p>
+        <div className={styles.priceContainer}>
+          <p
+            className={styles.price}
+            style={{ textDecoration: promoPrice ? "line-through" : "none" }}
+          >
+            {price} DH
+          </p>
+          {promoPrice && <p className={styles.promoPrice}>{promoPrice} DH</p>}
+        </div>
       </div>
     </div>
   );

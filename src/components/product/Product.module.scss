@@ -43,8 +43,13 @@
 }
 
 .material {
-  font-family: Core Sans AR45;
+  font-family: "Inter";
   font-size: 12px;
+}
+
+.priceContainer {
+  gap: 8px;
+  display: flex;
 }
 
 .price {

@@ -1,10 +1,3 @@
-/* Import Core Sans AR45 font */
-@font-face {
-  font-family: "Core Sans AR45";
-  src: url("assets/fonts/Core\ Sans\ AR\ 45\ Regular.ttf") format("opentype");
-  font-weight: 300;
-}
-
 @import url("https://fonts.googleapis.com/css2?family=Aladin&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
 /* Import Rolleston Title font */

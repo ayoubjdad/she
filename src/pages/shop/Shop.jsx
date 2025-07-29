@@ -1,17 +1,11 @@
 import React, { useState } from "react";
 import styles from "./Shop.module.scss";
-import {
-  Chip,
-  Radio,
-  Checkbox,
-  FormGroup,
-  FormControlLabel,
-} from "@mui/material";
+import { Chip, Radio, Checkbox, FormControlLabel } from "@mui/material";
 import { Product } from "../../components/product/Product";
 import { useNavigate } from "react-router";
 import { products } from "../../data/data";
 
-export default function Shop() {
+export default function Shop({ isPromotion = false }) {
   const navigate = useNavigate();
 
   const [filters, setFilters] = useState({
@@ -26,6 +20,12 @@ export default function Shop() {
   // Fonction pour filtrer et trier les produits
   const getFilteredProducts = () => {
     let filteredProducts = [...products];
+
+    if (isPromotion) {
+      filteredProducts = filteredProducts.filter(
+        (product) => product.promoPrice
+      );
+    }
 
     // Filtrer par disponibilité
     if (filters.onlineAvailable) {
