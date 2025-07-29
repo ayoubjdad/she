@@ -1,5 +1,5 @@
 import styles from "./Dashboard.module.scss";
-import { clients, products } from "../data/data";
+import { products } from "../data/data";
 import { useMemo, useState, useEffect } from "react";
 import ReactApexChart from "react-apexcharts";
 import * as XLSX from "xlsx";
@@ -63,7 +63,7 @@ const Dashboard = () => {
             };
           });
 
-        setOrders(newOrders);
+        setOrders(newOrders.reverse());
       })
       .catch((err) => console.error("❌ Error loading XLSX:", err));
   }, []);
@@ -89,12 +89,12 @@ const Dashboard = () => {
 
   const paginatedOrders = useMemo(() => {
     const start = (orderPage - 1) * ORDERS_PER_PAGE;
-    return orders; //.slice(start, start + ORDERS_PER_PAGE);
+    return orders.slice(start, start + ORDERS_PER_PAGE);
   }, [orders, orderPage]);
 
   return (
     <div className={styles.dashboardContainer}>
-      <h1 style={{ marginBottom: 32 }}>Business Dashboard</h1>
+      {/* <h1 style={{ marginBottom: 32 }}>Business Dashboard</h1> */}
       <div className={styles.summaryGrid}>
         <div className={styles.card}>
           <p>Orders</p>
@@ -174,8 +174,84 @@ const Dashboard = () => {
               ))}
             </tbody>
           </table>
+
+          {/* Pagination controls */}
+          <Pagination
+            orderPage={orderPage}
+            setOrderPage={setOrderPage}
+            orders={orders}
+            ORDERS_PER_PAGE={ORDERS_PER_PAGE}
+          />
         </div>
       </div>
+    </div>
+  );
+};
+
+const Pagination = ({ orderPage, setOrderPage, orders, ORDERS_PER_PAGE }) => {
+  return (
+    <div className={styles.paginationContainer}>
+      <button
+        className={`${styles.pageButton} ${
+          orderPage === 1 ? styles.disabled : ""
+        }`}
+        onClick={() => setOrderPage((p) => Math.max(1, p - 1))}
+        disabled={orderPage === 1}
+      >
+        ‹
+      </button>
+
+      {Array.from(
+        { length: Math.ceil(orders.length / ORDERS_PER_PAGE) },
+        (_, i) => i + 1
+      )
+        .filter(
+          (page) =>
+            page === 1 ||
+            page === Math.ceil(orders.length / ORDERS_PER_PAGE) ||
+            (page >= orderPage - 1 && page <= orderPage + 1)
+        )
+        .map((page, index, arr) => {
+          if (index > 0 && page - arr[index - 1] > 1) {
+            return (
+              <span key={`dots-${page}`} className={styles.dots}>
+                ...
+              </span>
+            );
+          }
+          return (
+            <button
+              key={page}
+              className={`${styles.pageNumber} ${
+                page === orderPage ? styles.activePage : ""
+              }`}
+              onClick={() => setOrderPage(page)}
+            >
+              {page}
+            </button>
+          );
+        })}
+
+      <button
+        className={`${styles.pageButton} ${
+          orderPage === Math.ceil(orders.length / ORDERS_PER_PAGE)
+            ? styles.disabled
+            : ""
+        }`}
+        onClick={() =>
+          setOrderPage((p) =>
+            Math.min(Math.ceil(orders.length / ORDERS_PER_PAGE), p + 1)
+          )
+        }
+        disabled={orderPage === Math.ceil(orders.length / ORDERS_PER_PAGE)}
+      >
+        ›
+      </button>
+
+      <span className={styles.resultsInfo}>
+        Showing {Math.min(orderPage * ORDERS_PER_PAGE, orders.length)} of{" "}
+        {orders.length} results
+      </span>
     </div>
   );
 };
