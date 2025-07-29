@@ -84,7 +84,7 @@ export const theme = createTheme({
           },
         },
         input: {
-          fontFamily: "Core Sans AR45",
+          fontFamily: "Inter",
           padding: "12px",
         },
       },

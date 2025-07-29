@@ -4,6 +4,7 @@ import "./App.css";
 import Header from "./layouts/header/Header";
 import Menu from "./layouts/menu/Menu";
 import Home from "./pages/home/Home";
+import Dashboard from "./dashboard/Dashboard";
 import { theme } from "./theme/overrides";
 import Footer from "./layouts/footer/Footer";
 import Product from "./pages/product/Product";
@@ -16,20 +17,33 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <Header />
-        <Menu />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/product" element={<Product />} />
-          <Route path="/shop" element={<Shop />} />
-          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route
-            path="/politique-de-confidentialite"
-            element={<PrivacyTerms />}
+            path="*"
+            element={
+              <>
+                <Header />
+                <Menu />
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/product" element={<Product />} />
+                  <Route path="/shop" element={<Shop />} />
+                  <Route path="/checkout" element={<Checkout />} />
+                  <Route
+                    path="/politique-de-confidentialite"
+                    element={<PrivacyTerms />}
+                  />
+                  <Route
+                    path="/conditions-generales"
+                    element={<GeneralConditions />}
+                  />
+                </Routes>
+                <Footer />
+              </>
+            }
           />
-          <Route path="/conditions-generales" element={<GeneralConditions />} />
         </Routes>
-        <Footer />
       </Router>
     </ThemeProvider>
   );
