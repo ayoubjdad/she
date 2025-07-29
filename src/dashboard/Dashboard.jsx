@@ -103,15 +103,15 @@ const Dashboard = () => {
         <div className={styles.card}>
           <p>Revenue</p>
           <h2>{revenue} DH</h2>
-        </div>{" "}
+        </div>
         <div className={styles.card}>
           <p>Profit</p>
           <h2>{revenue} DH</h2>
-        </div>{" "}
-        <div className={styles.card}>
+        </div>
+        {/* <div className={styles.card}>
           <p>Sells by Month</p>
           <OrdersRevenueChart orders={orders} products={products} />
-        </div>
+        </div> */}
       </div>
       <div className={styles.tablesSection}>
         <div className={styles.tableBlock}>
@@ -125,7 +125,7 @@ const Dashboard = () => {
                 <th>Address</th>
                 <th>City</th>
                 <th>Price</th>
-                <th>status</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody>
@@ -204,33 +204,40 @@ const OrdersRevenueChart = ({ orders, products }) => {
 
   const series = [
     { name: "Orders", type: "line", data: orderCounts },
-    { name: "Revenue (DH)", type: "line", data: revenues },
+    // { name: "Revenue (DH)", type: "line", data: revenues },
   ];
 
   const options = {
-    chart: { height: 350, type: "line", toolbar: { show: true } },
+    chart: { height: 100, type: "line", toolbar: { show: false } },
     stroke: { width: [3, 3], curve: "smooth" },
-    colors: ["#6c63ff", "#ffb347"],
-    dataLabels: { enabled: true },
-    markers: { size: 5 },
-    xaxis: { categories: months, title: { text: "Months" } },
+    colors: ["#781428"],
+    markers: { size: 0 },
+    xaxis: {
+      categories: months,
+      labels: { show: false },
+      axisTicks: { show: false },
+      axisBorder: { show: false },
+    },
     yaxis: [
-      { title: { text: "Orders" } },
-      { opposite: true, title: { text: "Revenue (DH)" } },
+      {
+        labels: { show: false },
+        axisTicks: { show: false },
+        axisBorder: { show: false },
+      },
     ],
+    grid: { show: false },
     tooltip: { shared: true, intersect: false },
     legend: { position: "top" },
   };
 
   return (
-    <div style={{ marginTop: 32 }}>
-      <ReactApexChart
-        options={options}
-        series={series}
-        type="line"
-        height={50}
-      />
-    </div>
+    <ReactApexChart
+      options={options}
+      series={series}
+      type="line"
+      height={100}
+      width="100%"
+    />
   );
 };
 
