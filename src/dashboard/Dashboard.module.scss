@@ -14,15 +14,24 @@
 }
 
 .card {
+  gap: 12px;
+  display: grid;
   background: #fff;
   border-radius: 12px;
   //   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   padding: 24px 16px;
-  text-align: center;
   transition: box-shadow 0.2s;
 }
 .card:hover {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.status {
+  gap: 8px;
+  display: flex;
+  font-size: 12px;
+  font-weight: 500;
+  color: green;
 }
 
 .tablesSection {
@@ -36,13 +45,16 @@
   background: #fff;
   border-radius: 12px;
   //   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  padding: 20px;
+
+  h3 {
+    padding: 20px;
+  }
 }
 
 .table {
   width: 100%;
+  padding: 20px;
   border-collapse: collapse;
-  margin-top: 12px;
 }
 .table th,
 .table td {
@@ -52,4 +64,12 @@
 }
 .table th {
   background: #f5f5f5;
+}
+.table th:first-child,
+.table td:first-child {
+  padding-left: 20px;
+}
+.table th:last-child,
+.table td:last-child {
+  padding-right: 20px;
 }
