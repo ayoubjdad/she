@@ -1,11 +1,72 @@
 import styles from "./Dashboard.module.scss";
-import { clients, orders, products } from "../data/data";
-import { useMemo, useState } from "react";
+import { clients, products } from "../data/data";
+import { useMemo, useState, useEffect } from "react";
 import ReactApexChart from "react-apexcharts";
+import * as XLSX from "xlsx";
+
+const GOOGLE_SHEET_ID =
+  "e/2PACX-1vSrXEILebKHPO5BIh72gMN6YcAc-web3YwEf1VdhvPrAXLzQHes7XhcwXCB65X3frMm1wDxqofmidNU";
+const XLSX_URL = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/pub?output=xlsx`;
+
+const statusColor = {
+  Pending: { color: "#e28603", backgroundColor: "#f3d9b3" },
+  Delivered: { color: "#0e973a", backgroundColor: "#b9eac7" },
+  Shipped: { color: "#194cdc", backgroundColor: "#c9d7ff" },
+};
 
 const Dashboard = () => {
   const [orderPage, setOrderPage] = useState(1);
   const ORDERS_PER_PAGE = 10;
+  const [orders, setOrders] = useState([]);
+
+  // Load data directly from Google Sheets XLSX
+  useEffect(() => {
+    fetch(XLSX_URL)
+      .then((res) => res.arrayBuffer())
+      .then((data) => {
+        const workbook = XLSX.read(data, { type: "array" });
+        const sheetName = workbook.SheetNames[0];
+        const worksheet = workbook.Sheets[sheetName];
+        const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+
+        // First row is header
+        const [header, ...rows] = jsonData;
+        if (!header) return;
+
+        const idx = (name) =>
+          header.findIndex(
+            (h) => h?.toString().trim().toLowerCase() === name.toLowerCase()
+          );
+
+        const newOrders = rows
+          .filter((row) => row[idx("id")])
+          .map((row) => {
+            let productsList = [];
+            try {
+              const productsCell = row[idx("products")];
+              if (productsCell && productsCell !== "undefined") {
+                productsList = JSON.parse(productsCell);
+              }
+            } catch {
+              console.warn("Invalid products JSON:", row[idx("products")]);
+              productsList = [];
+            }
+
+            return {
+              id: row[idx("id")] ?? null,
+              city: row[idx("city")] ?? "",
+              clientName: row[idx("clientName")] ?? "",
+              products: productsList,
+              date: row[idx("date")] ?? "",
+              status: row[idx("status")] ?? "",
+              address: row[idx("address")] ?? "",
+            };
+          });
+
+        setOrders(newOrders);
+      })
+      .catch((err) => console.error("❌ Error loading XLSX:", err));
+  }, []);
 
   const revenue = useMemo(() => {
     try {
@@ -14,7 +75,7 @@ const Dashboard = () => {
           cmd.products
             .map((p) =>
               p.id
-                ? products.find((pr) => pr.id === p.id).price * p.quantity
+                ? products.find((pr) => pr.id === p.id)?.price * p.quantity
                 : 0
             )
             .reduce((a, b) => a + b, 0)
@@ -28,7 +89,7 @@ const Dashboard = () => {
 
   const paginatedOrders = useMemo(() => {
     const start = (orderPage - 1) * ORDERS_PER_PAGE;
-    return orders.slice(start, start + ORDERS_PER_PAGE);
+    return orders; //.slice(start, start + ORDERS_PER_PAGE);
   }, [orders, orderPage]);
 
   return (
@@ -38,17 +99,20 @@ const Dashboard = () => {
         <div className={styles.card}>
           <p>Orders</p>
           <h2>{orders.length}</h2>
-          <p className={styles.status}>10%</p>
         </div>
         <div className={styles.card}>
           <p>Revenue</p>
           <h2>{revenue} DH</h2>
-          <p className={styles.status}>-2.4%</p>
+        </div>{" "}
+        <div className={styles.card}>
+          <p>Profit</p>
+          <h2>{revenue} DH</h2>
+        </div>{" "}
+        <div className={styles.card}>
+          <p>Sells by Month</p>
+          <OrdersRevenueChart orders={orders} products={products} />
         </div>
-        <div className={styles.card}></div>
-        <div className={styles.card}></div>
       </div>
-
       <div className={styles.tablesSection}>
         <div className={styles.tableBlock}>
           <h3>Orders</h3>
@@ -57,120 +121,59 @@ const Dashboard = () => {
               <tr>
                 <th>ID</th>
                 <th>Client</th>
-                <th>City</th>
                 <th>Products</th>
+                <th>Address</th>
+                <th>City</th>
                 <th>Price</th>
+                <th>status</th>
               </tr>
             </thead>
             <tbody>
-              {paginatedOrders.map((cmd) => {
-                return (
-                  <tr key={cmd.id}>
-                    <td>{cmd.id}</td>
-                    <td>{clients.find((c) => c.id === cmd.clientId)?.name}</td>
-                    <td>{cmd.city}</td>
-                    <td>
-                      {!cmd.products?.length
-                        ? "-"
-                        : cmd.products
-                            .map(
-                              (p) => products.find((pr) => pr.id === p.id).name
-                            )
-                            .join(", ")}
-                    </td>
-                    <td>
-                      {cmd.products
-                        .map((p) =>
-                          p.id
-                            ? products.find((pr) => pr.id === p.id).price *
-                              p.quantity
-                            : 0
-                        )
-                        .reduce((a, b) => a + b, 0)}{" "}
-                      DH
-                    </td>
-                  </tr>
-                );
-              })}
+              {paginatedOrders.map((cmd) => (
+                <tr key={cmd.id}>
+                  <td>{cmd.id}</td>
+                  <td>{cmd.clientName}</td>
+                  <td>
+                    {!cmd.products?.length
+                      ? "-"
+                      : cmd.products
+                          .map(
+                            (p) =>
+                              `${p.quantity} ${
+                                products.find((pr) => pr.id === p.id)?.name
+                              }` || "?"
+                          )
+                          .join(", ")}
+                  </td>
+                  <td>{cmd.address}</td>
+                  <td>{cmd.city}</td>
+                  <td>
+                    {cmd.products
+                      .map((p) =>
+                        p.id
+                          ? products.find((pr) => pr.id === p.id)?.price *
+                            p.quantity
+                          : 0
+                      )
+                      .reduce((a, b) => a + b, 0)}{" "}
+                    DH
+                  </td>
+                  <td>
+                    <p
+                      className={styles.status}
+                      style={{
+                        backgroundColor:
+                          statusColor[cmd.status]?.backgroundColor,
+                        color: statusColor[cmd.status]?.color,
+                      }}
+                    >
+                      {cmd.status}
+                    </p>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
-          {/* Pagination controls */}
-          <div
-            style={{ display: "flex", justifyContent: "center", marginTop: 12 }}
-          >
-            <button
-              onClick={() => setOrderPage((p) => Math.max(1, p - 1))}
-              disabled={orderPage === 1}
-              style={{ marginRight: 8 }}
-            >
-              Previous
-            </button>
-            <span style={{ alignSelf: "center" }}>
-              Page {orderPage} / {Math.ceil(orders.length / ORDERS_PER_PAGE)}
-            </span>
-            <button
-              onClick={() =>
-                setOrderPage((p) =>
-                  Math.min(Math.ceil(orders.length / ORDERS_PER_PAGE), p + 1)
-                )
-              }
-              disabled={
-                orderPage === Math.ceil(orders.length / ORDERS_PER_PAGE)
-              }
-              style={{ marginLeft: 8 }}
-            >
-              Next
-            </button>
-          </div>
-        </div>
-        <div className={styles.tableBlock}>
-          <h3>Sells by Month</h3>
-          {/* Table for fallback/quick view */}
-          {/* <table className={styles.table}>
-            <thead>
-              <tr>
-                <th>Month</th>
-                <th>Orders</th>
-                <th>Revenue</th>
-              </tr>
-            </thead>
-            <tbody>
-              {(() => {
-                // Group orders by month
-                const monthMap = {};
-                orders.forEach((cmd) => {
-                  const d = new Date(cmd.date);
-                  const month =
-                    d.getFullYear() +
-                    "-" +
-                    String(d.getMonth() + 1).padStart(2, "0");
-                  if (!monthMap[month])
-                    monthMap[month] = { count: 0, revenue: 0 };
-                  monthMap[month].count++;
-                  monthMap[month].revenue += cmd.products
-                    .map((p) =>
-                      p.id
-                        ? products.find((pr) => pr.id === p.id).price *
-                          p.quantity
-                        : 0
-                    )
-                    .reduce((a, b) => a + b, 0);
-                });
-                return Object.entries(monthMap)
-                  .sort(([a], [b]) => a.localeCompare(b))
-                  .map(([month, data]) => (
-                    <tr key={month}>
-                      <td>{month}</td>
-                      <td>{data.count}</td>
-                      <td>{data.revenue} DH</td>
-                    </tr>
-                  ));
-              })()}
-            </tbody>
-          </table> */}
-
-          {/* Bar chart for sells by month */}
-          <OrdersRevenueChart orders={orders} products={products} />
         </div>
       </div>
     </div>
@@ -178,17 +181,19 @@ const Dashboard = () => {
 };
 
 const OrdersRevenueChart = ({ orders, products }) => {
-  // Prepare chart data
   const monthMap = {};
   orders.forEach((cmd) => {
     const d = new Date(cmd.date);
+    if (isNaN(d)) return;
     const month =
       d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0");
     if (!monthMap[month]) monthMap[month] = { count: 0, revenue: 0 };
     monthMap[month].count++;
     monthMap[month].revenue += cmd.products
       .map((p) =>
-        p.id ? products.find((pr) => pr.id === p.id).price * p.quantity : 0
+        p.id
+          ? products.find((pr) => pr.id === Number(p.id))?.price * p.quantity
+          : 0
       )
       .reduce((a, b) => a + b, 0);
   });
@@ -198,55 +203,23 @@ const OrdersRevenueChart = ({ orders, products }) => {
   const revenues = months.map((m) => monthMap[m].revenue);
 
   const series = [
-    {
-      name: "Orders",
-      type: "line",
-      data: orderCounts,
-    },
-    {
-      name: "Revenue (DH)",
-      type: "line",
-      data: revenues,
-    },
+    { name: "Orders", type: "line", data: orderCounts },
+    { name: "Revenue (DH)", type: "line", data: revenues },
   ];
 
   const options = {
-    chart: {
-      height: 350,
-      type: "line",
-      toolbar: { show: true },
-    },
-    stroke: {
-      width: [3, 3],
-      curve: "smooth",
-    },
+    chart: { height: 350, type: "line", toolbar: { show: true } },
+    stroke: { width: [3, 3], curve: "smooth" },
     colors: ["#6c63ff", "#ffb347"],
-    dataLabels: {
-      enabled: true,
-    },
-    markers: {
-      size: 5,
-    },
-    xaxis: {
-      categories: months,
-      title: { text: "Months" },
-    },
+    dataLabels: { enabled: true },
+    markers: { size: 5 },
+    xaxis: { categories: months, title: { text: "Months" } },
     yaxis: [
-      {
-        title: { text: "Orders" },
-      },
-      {
-        opposite: true,
-        title: { text: "Revenue (DH)" },
-      },
+      { title: { text: "Orders" } },
+      { opposite: true, title: { text: "Revenue (DH)" } },
     ],
-    tooltip: {
-      shared: true,
-      intersect: false,
-    },
-    legend: {
-      position: "top",
-    },
+    tooltip: { shared: true, intersect: false },
+    legend: { position: "top" },
   };
 
   return (
@@ -255,7 +228,7 @@ const OrdersRevenueChart = ({ orders, products }) => {
         options={options}
         series={series}
         type="line"
-        height={350}
+        height={50}
       />
     </div>
   );
