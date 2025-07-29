@@ -4,6 +4,7 @@ import { Box, Button, Chip, Divider, Drawer } from "@mui/material";
 import { useLocation, useNavigate } from "react-router";
 import { useCart } from "../../context/CartProvider";
 import logo from "../../assets/logo.png";
+import logoDark from "../../assets/logo-dark.png";
 
 export default function Menu() {
   const { pathname } = useLocation();
@@ -64,7 +65,11 @@ export default function Menu() {
             style={{ color: isHomePage ? "#fffcf0" : "#231918" }}
             onClick={() => onClick("")}
           >
-            <img src={logo} alt="logo" />
+            {isHomePage ? (
+              <img src={logo} alt="logo" />
+            ) : (
+              <img src={logoDark} alt="logo" />
+            )}
           </span>
 
           <div className={`${styles.group} ${styles.groupEnd}`}>
