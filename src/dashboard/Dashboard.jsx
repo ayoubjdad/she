@@ -18,9 +18,11 @@ const Dashboard = () => {
   const [orderPage, setOrderPage] = useState(1);
   const ORDERS_PER_PAGE = 10;
   const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // Load data directly from Google Sheets XLSX
   useEffect(() => {
+    setLoading(true);
     fetch(XLSX_URL)
       .then((res) => res.arrayBuffer())
       .then((data) => {
@@ -31,7 +33,11 @@ const Dashboard = () => {
 
         // First row is header
         const [header, ...rows] = jsonData;
-        if (!header) return;
+        if (!header) {
+          setOrders([]);
+          setLoading(false);
+          return;
+        }
 
         const idx = (name) =>
           header.findIndex(
@@ -64,8 +70,13 @@ const Dashboard = () => {
           });
 
         setOrders(newOrders.reverse());
+        setOrderPage(1); // Reset to first page on data change
+        setLoading(false);
       })
-      .catch((err) => console.error("❌ Error loading XLSX:", err));
+      .catch((err) => {
+        setLoading(false);
+        console.error("❌ Error loading XLSX:", err);
+      });
   }, []);
 
   const revenue = useMemo(() => {
@@ -94,94 +105,96 @@ const Dashboard = () => {
 
   return (
     <div className={styles.dashboardContainer}>
-      {/* <h1 style={{ marginBottom: 32 }}>Business Dashboard</h1> */}
+      <h1 className={styles.title}>Business Dashboard</h1>
       <div className={styles.summaryGrid}>
         <div className={styles.card}>
           <p>Orders</p>
-          <h2>{orders.length}</h2>
+          <h2>{loading ? "..." : orders.length}</h2>
         </div>
         <div className={styles.card}>
           <p>Revenue</p>
-          <h2>{revenue} DH</h2>
+          <h2>{loading ? "..." : `${revenue} DH`}</h2>
         </div>
         <div className={styles.card}>
           <p>Profit</p>
-          <h2>{revenue} DH</h2>
+          <h2>{loading ? "..." : `${revenue} DH`}</h2>
         </div>
-        {/* <div className={styles.card}>
-          <p>Sells by Month</p>
-          <OrdersRevenueChart orders={orders} products={products} />
-        </div> */}
       </div>
       <div className={styles.tablesSection}>
         <div className={styles.tableBlock}>
           <h3>Orders</h3>
-          <table className={styles.table}>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Client</th>
-                <th>Products</th>
-                <th>Address</th>
-                <th>City</th>
-                <th>Price</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {paginatedOrders.map((cmd) => (
-                <tr key={cmd.id}>
-                  <td>{cmd.id}</td>
-                  <td>{cmd.clientName}</td>
-                  <td>
-                    {!cmd.products?.length
-                      ? "-"
-                      : cmd.products
-                          .map(
-                            (p) =>
-                              `${p.quantity} ${
-                                products.find((pr) => pr.id === p.id)?.name
-                              }` || "?"
+          {loading ? (
+            <div className={styles.loading}>Loading orders...</div>
+          ) : orders.length === 0 ? (
+            <div className={styles.empty}>No orders found.</div>
+          ) : (
+            <>
+              <table className={styles.table}>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Client</th>
+                    <th>Products</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {paginatedOrders.map((cmd) => (
+                    <tr key={cmd.id}>
+                      <td>{cmd.id}</td>
+                      <td>{cmd.clientName}</td>
+                      <td>
+                        {!cmd.products?.length
+                          ? "-"
+                          : cmd.products
+                              .map(
+                                (p) =>
+                                  `${p.quantity} ${
+                                    products.find((pr) => pr.id === p.id)?.name
+                                  }` || "?"
+                              )
+                              .join(", ")}
+                      </td>
+                      <td>{cmd.address}</td>
+                      <td>{cmd.city}</td>
+                      <td>
+                        {cmd.products
+                          .map((p) =>
+                            p.id
+                              ? products.find((pr) => pr.id === p.id)?.price *
+                                p.quantity
+                              : 0
                           )
-                          .join(", ")}
-                  </td>
-                  <td>{cmd.address}</td>
-                  <td>{cmd.city}</td>
-                  <td>
-                    {cmd.products
-                      .map((p) =>
-                        p.id
-                          ? products.find((pr) => pr.id === p.id)?.price *
-                            p.quantity
-                          : 0
-                      )
-                      .reduce((a, b) => a + b, 0)}{" "}
-                    DH
-                  </td>
-                  <td>
-                    <p
-                      className={styles.status}
-                      style={{
-                        backgroundColor:
-                          statusColor[cmd.status]?.backgroundColor,
-                        color: statusColor[cmd.status]?.color,
-                      }}
-                    >
-                      {cmd.status}
-                    </p>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-
-          {/* Pagination controls */}
-          <Pagination
-            orderPage={orderPage}
-            setOrderPage={setOrderPage}
-            orders={orders}
-            ORDERS_PER_PAGE={ORDERS_PER_PAGE}
-          />
+                          .reduce((a, b) => a + b, 0)}{" "}
+                        DH
+                      </td>
+                      <td>
+                        <p
+                          className={styles.status}
+                          style={{
+                            backgroundColor:
+                              statusColor[cmd.status]?.backgroundColor,
+                            color: statusColor[cmd.status]?.color,
+                          }}
+                        >
+                          {cmd.status}
+                        </p>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <Pagination
+                orderPage={orderPage}
+                setOrderPage={setOrderPage}
+                orders={orders}
+                ORDERS_PER_PAGE={ORDERS_PER_PAGE}
+              />
+            </>
+          )}
         </div>
       </div>
     </div>
