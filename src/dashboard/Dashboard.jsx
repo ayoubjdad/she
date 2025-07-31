@@ -262,71 +262,10 @@ const Pagination = ({ orderPage, setOrderPage, orders, ORDERS_PER_PAGE }) => {
       </button>
 
       <span className={styles.resultsInfo}>
-        Showing {Math.min(orderPage * ORDERS_PER_PAGE, orders.length)} of{" "}
-        {orders.length} results
+        {Math.min(orderPage * ORDERS_PER_PAGE, orders.length)} of{" "}
+        {orders.length}
       </span>
     </div>
-  );
-};
-
-const OrdersRevenueChart = ({ orders, products }) => {
-  const monthMap = {};
-  orders.forEach((cmd) => {
-    const d = new Date(cmd.date);
-    if (isNaN(d)) return;
-    const month =
-      d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0");
-    if (!monthMap[month]) monthMap[month] = { count: 0, revenue: 0 };
-    monthMap[month].count++;
-    monthMap[month].revenue += cmd.products
-      .map((p) =>
-        p.id
-          ? products.find((pr) => pr.id === Number(p.id))?.price * p.quantity
-          : 0
-      )
-      .reduce((a, b) => a + b, 0);
-  });
-
-  const months = Object.keys(monthMap).sort();
-  const orderCounts = months.map((m) => monthMap[m].count);
-  const revenues = months.map((m) => monthMap[m].revenue);
-
-  const series = [
-    { name: "Orders", type: "line", data: orderCounts },
-    // { name: "Revenue (DH)", type: "line", data: revenues },
-  ];
-
-  const options = {
-    chart: { height: 100, type: "line", toolbar: { show: false } },
-    stroke: { width: [3, 3], curve: "smooth" },
-    colors: ["#781428"],
-    markers: { size: 0 },
-    xaxis: {
-      categories: months,
-      labels: { show: false },
-      axisTicks: { show: false },
-      axisBorder: { show: false },
-    },
-    yaxis: [
-      {
-        labels: { show: false },
-        axisTicks: { show: false },
-        axisBorder: { show: false },
-      },
-    ],
-    grid: { show: false },
-    tooltip: { shared: true, intersect: false },
-    legend: { position: "top" },
-  };
-
-  return (
-    <ReactApexChart
-      options={options}
-      series={series}
-      type="line"
-      height={100}
-      width="100%"
-    />
   );
 };
 

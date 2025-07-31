@@ -1,3 +1,16 @@
+// Loading and empty states
+.loading {
+  text-align: center;
+  color: #888;
+  font-size: 1.1em;
+  padding: 32px 0;
+}
+.empty {
+  text-align: center;
+  color: #bbb;
+  font-size: 1.1em;
+  padding: 32px 0;
+}
 .dashboardContainer {
   padding: 32px 24px;
   background: #faf9f6;
