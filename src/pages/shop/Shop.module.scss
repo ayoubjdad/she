@@ -1,17 +1,30 @@
 .main {
   padding: 100px 80px 80px;
   background-color: #fffcf0;
+
+  @media (max-width: 600px) {
+    padding: 60px 8px 16px 8px;
+  }
 }
 
 .container {
   gap: 32px;
   display: grid;
+
+  @media (max-width: 600px) {
+    gap: 8px;
+  }
 }
 
 .shop {
   gap: 32px;
   display: grid;
   grid-template-columns: 1fr 4fr;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
 }
 
 .filters {
@@ -19,9 +32,16 @@
   display: grid;
   height: fit-content;
 
+  @media (max-width: 600px) {
+    gap: 4px;
+  }
   h3 {
     font-size: 16px;
     color: #231918;
+
+    @media (max-width: 600px) {
+      font-size: 12px;
+    }
   }
 }
 
@@ -30,11 +50,19 @@
   display: grid;
   height: fit-content;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+
+  @media (max-width: 600px) {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
 }
 
 .group {
   gap: 8px;
   display: grid;
+
+  @media (max-width: 600px) {
+    gap: 2px;
+  }
 }
 
 .divider {

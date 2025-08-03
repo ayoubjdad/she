@@ -10,6 +10,11 @@
   display: grid;
   align-items: center;
   grid-template-columns: repeat(3, 1fr);
+
+  i {
+    font-size: 20px;
+    padding: 0px 10px;
+  }
 }
 
 .logo {
@@ -70,4 +75,25 @@
 
 .cartItemInfos {
   display: grid;
+}
+
+// Mobile version
+.mainMobile {
+  top: 23px;
+  padding: 10px;
+  position: absolute;
+  background-color: transparent;
+  width: -webkit-fill-available;
+}
+
+.logoMobile {
+  display: flex;
+  color: white;
+  cursor: pointer;
+  font-size: 24px;
+  justify-content: center;
+
+  img {
+    width: 80px;
+  }
 }

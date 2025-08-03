@@ -41,6 +41,7 @@ export const Product = ({ product = {} }) => {
           />
         )}
       </div>
+
       <div className={styles.productContainer}>
         <div>
           <h3>{name}</h3>

@@ -5,11 +5,13 @@ import { Product as SingleProduct } from "../../components/product/Product";
 import { useLocation, useNavigate } from "react-router";
 import { products } from "../../data/data";
 import { useCart } from "../../context/CartProvider";
+import { useIsMobile } from "../../helpers/functions.helper";
 
 export default function Product() {
   const navigate = useNavigate();
   const location = useLocation();
   const { addToCart } = useCart();
+  const isMobile = useIsMobile();
 
   const { product = {} } = location.state || {};
 
@@ -36,13 +38,18 @@ export default function Product() {
             color: "#231918",
             borderColor: "#231918",
             cursor: "pointer",
+            display: isMobile ? "none" : "flex",
           }}
           onClick={goToHome} // Gérer le clic pour rediriger
         />
 
         <div className={styles.product}>
-          <Details product={product} />
-          <AddToCart product={product} addToCart={addToCart} />
+          <Details product={product} isMobile={isMobile} />
+          <AddToCart
+            product={product}
+            addToCart={addToCart}
+            isMobile={isMobile}
+          />
         </div>
 
         <div className={styles.divider} />
@@ -58,7 +65,7 @@ export default function Product() {
   );
 }
 
-const Details = ({ product }) => {
+const Details = ({ product, isMobile = false }) => {
   const { image, description } = product;
 
   return (
@@ -72,15 +79,19 @@ const Details = ({ product }) => {
         </div>
       </div>
 
-      <h3>Informations détaillées</h3>
-
-      <p className={styles.description}>{description}</p>
+      {isMobile ? null : (
+        <>
+          <h3>Informations détaillées</h3>
+          <p className={styles.description}>{description}</p>
+        </>
+      )}
     </div>
   );
 };
 
-const AddToCart = ({ product, setCart, addToCart = () => {} }) => {
-  const { id, name, material, price } = product;
+const AddToCart = ({ product, setCart, isMobile, addToCart = () => {} }) => {
+  const { id, name, material, price, image, description } = product;
+
   const chipStyle = { color: "#231918", borderColor: "#231918" };
 
   const [shopDetails, setShopDetails] = useState({ quantity: 1, coupon: "" });
@@ -92,6 +103,14 @@ const AddToCart = ({ product, setCart, addToCart = () => {} }) => {
       <h1>{name}</h1>
       <p>{price} DH</p>
       <p className={styles.description}>{material}</p>
+
+      {!isMobile ? null : (
+        <>
+          <div className={styles.divider} />
+          <h3>Informations détaillées</h3>
+          <p className={styles.description}>{description}</p>
+        </>
+      )}
 
       <div className={styles.divider} />
 
@@ -118,23 +137,12 @@ const AddToCart = ({ product, setCart, addToCart = () => {} }) => {
         </div>
       </div>
 
-      <div className={styles.shopDetails}>
-        <Button
-          style={{
-            width: "100%",
-            color: "#231918",
-            border: "1px solid #231918",
-            backgroundColor: "transparent",
-          }}
-          onClick={() => addToCart(product, Number(shopDetails.quantity))}
-        >
-          Ajouter au panier
-        </Button>
-
-        <Button style={{ width: "100%" }} onClick={() => addToCart(product, 1)}>
-          Acheter maintenant
-        </Button>
-      </div>
+      <Button
+        style={{ width: "100%" }}
+        onClick={() => addToCart(product, Number(shopDetails.quantity))}
+      >
+        Ajouter au panier
+      </Button>
 
       <div className={styles.infos}>
         <i className="fi fi-rs-shield-check" />

@@ -1,8 +1,18 @@
 import React, { useState } from "react";
 import styles from "./Shop.module.scss";
-import { Chip, Radio, Checkbox, FormControlLabel } from "@mui/material";
+import {
+  Chip,
+  Radio,
+  Checkbox,
+  FormControlLabel,
+  Drawer,
+  Box,
+  Button,
+  Divider,
+} from "@mui/material";
 import { Product } from "../../components/product/Product";
 import { useNavigate } from "react-router";
+import { useIsMobile } from "../../helpers/functions.helper";
 import { products } from "../../data/data";
 
 export default function Shop({ isPromotion = false }) {
@@ -14,6 +24,8 @@ export default function Shop({ isPromotion = false }) {
     newArrival: false,
     categories: [],
   });
+  const isMobile = useIsMobile();
+  const [openFilters, setOpenFilters] = useState(false);
 
   const goToHome = () => navigate("/");
 
@@ -69,12 +81,60 @@ export default function Shop({ isPromotion = false }) {
               <i className="fi fi-rr-arrow-left" /> Retour à l'accueil
             </div>
           }
-          style={{ color: "#231918", borderColor: "#231918" }}
+          style={{
+            color: "#231918",
+            borderColor: "#231918",
+            display: isMobile ? "none" : "flex",
+          }}
           onClick={goToHome}
         />
 
         <div className={styles.shop}>
-          <Filters filters={filters} setFilters={setFilters} />
+          {isMobile ? (
+            <>
+              <Chip
+                label={
+                  <div
+                    style={{ gap: 8, display: "flex", alignItems: "center" }}
+                  >
+                    <i className="fi fi-rr-filter" />
+                    <span>Filtres</span>
+                  </div>
+                }
+                style={{ color: "#231918", borderColor: "#231918" }}
+                onClick={() => setOpenFilters(true)}
+              />
+
+              <Drawer
+                anchor="left"
+                open={openFilters}
+                onClose={() => setOpenFilters(false)}
+              >
+                <Box sx={{ width: 260, p: 2 }}>
+                  <Box
+                    sx={{
+                      mb: 2,
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <h2>Filtres</h2>
+                    <Box
+                      component="i"
+                      className="fi fi-bs-cross"
+                      onClick={() => setOpenFilters(false)}
+                      sx={{ cursor: "pointer" }}
+                    />
+                  </Box>
+                  <Divider sx={{ mb: 2 }} />
+                  <Filters filters={filters} setFilters={setFilters} />
+                </Box>
+              </Drawer>
+            </>
+          ) : (
+            <Filters filters={filters} setFilters={setFilters} />
+          )}
 
           <div className={styles.products}>
             {filteredProducts?.length ? (

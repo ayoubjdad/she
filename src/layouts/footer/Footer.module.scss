@@ -1,6 +1,10 @@
 .main {
   padding: 80px;
   background-color: #f3d9b3;
+
+  @media (max-width: 600px) {
+    display: none;
+  }
 }
 
 .container {
@@ -18,6 +22,12 @@
   gap: 32px;
   display: flex;
   align-items: center;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
 }
 
 .copyright {
@@ -26,16 +36,39 @@
   padding: 20px 80px;
   background-color: #231918;
   justify-content: space-between;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 8px 8px;
+    gap: 8px;
+  }
 }
 
 .pages {
   gap: 16px;
   display: flex;
   align-items: center;
+
+  @media (max-width: 600px) {
+    gap: 4px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
 }
 
 .divider {
   width: 1px;
   height: 80%;
   border-left: 1px solid #353231;
+
+  @media (max-width: 600px) {
+    width: 100%;
+    height: 1px;
+    border-left: none;
+    border-top: 1px solid #353231;
+    margin: 8px 0;
+  }
 }

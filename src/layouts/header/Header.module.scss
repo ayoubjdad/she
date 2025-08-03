@@ -1,6 +1,9 @@
 .main {
   padding: 4px 80px;
   background-color: #fffcf0;
+  @media (max-width: 600px) {
+    padding: 4px 12px;
+  }
 }
 
 .text {
@@ -11,4 +14,19 @@
   align-items: center;
   justify-content: center;
   font-family: "Inter";
+  @media (max-width: 600px) {
+    font-size: 10px;
+    gap: 4px;
+  }
+}
+
+@media (max-width: 600px) {
+  .main {
+    padding: 4px 12px;
+  }
+
+  .text {
+    font-size: 10px;
+    gap: 4px;
+  }
 }
