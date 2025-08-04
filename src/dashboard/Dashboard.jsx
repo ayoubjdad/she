@@ -1,7 +1,6 @@
 import styles from "./Dashboard.module.scss";
 import { products } from "../data/data";
 import { useMemo, useState, useEffect } from "react";
-import ReactApexChart from "react-apexcharts";
 import * as XLSX from "xlsx";
 
 const GOOGLE_SHEET_ID =
@@ -9,9 +8,9 @@ const GOOGLE_SHEET_ID =
 const XLSX_URL = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/pub?output=xlsx`;
 
 const statusColor = {
-  Pending: { color: "#e28603", backgroundColor: "#f3d9b3" },
-  Delivered: { color: "#0e973a", backgroundColor: "#b9eac7" },
-  Shipped: { color: "#194cdc", backgroundColor: "#c9d7ff" },
+  Pending: { color: "#e28603", backgroundColor: "#faf4f0" },
+  Delivered: { color: "#0e973a", backgroundColor: "#effcf3" },
+  Shipped: { color: "#194cdc", backgroundColor: "#e3eaff" },
 };
 
 const Dashboard = () => {
@@ -105,24 +104,46 @@ const Dashboard = () => {
 
   return (
     <div className={styles.dashboardContainer}>
-      <h1 className={styles.title}>Business Dashboard</h1>
+      <h1 className={styles.title}>Orders</h1>
       <div className={styles.summaryGrid}>
         <div className={styles.card}>
-          <p>Orders</p>
+          <p>Total Orders</p>
           <h2>{loading ? "..." : orders.length}</h2>
+          <p>
+            <i class="fi fi-rr-arrow-trend-down"></i> 25.2% last week
+          </p>
+        </div>
+        <div className={styles.card}>
+          <p>Pending</p>
+          <h2>{loading ? "..." : `${revenue}`}</h2>
+          <p>
+            <i class="fi fi-rr-arrow-trend-down"></i> 25.2% last week
+          </p>
+        </div>
+        <div className={styles.card}>
+          <p>Returns Orders</p>
+          <h2>{loading ? "..." : `${revenue}`}</h2>
+          <p>
+            <i class="fi fi-rr-arrow-trend-down"></i> 25.2% last week
+          </p>{" "}
+        </div>
+        <div className={styles.card}>
+          <p>Fulfilled orders over time</p>
+          <h2>{loading ? "..." : `${revenue}`}</h2>
+          <p>
+            <i class="fi fi-rr-arrow-trend-down"></i> 25.2% last week
+          </p>
         </div>
         <div className={styles.card}>
           <p>Revenue</p>
           <h2>{loading ? "..." : `${revenue} DH`}</h2>
-        </div>
-        <div className={styles.card}>
-          <p>Profit</p>
-          <h2>{loading ? "..." : `${revenue} DH`}</h2>
+          <p>
+            <i class="fi fi-rr-arrow-trend-down"></i> 25.2% last week
+          </p>
         </div>
       </div>
       <div className={styles.tablesSection}>
         <div className={styles.tableBlock}>
-          <h3>Orders</h3>
           {loading ? (
             <div className={styles.loading}>Loading orders...</div>
           ) : orders.length === 0 ? (
@@ -132,13 +153,14 @@ const Dashboard = () => {
               <table className={styles.table}>
                 <thead>
                   <tr>
-                    <th>ID</th>
+                    <th>#</th>
                     <th>Client</th>
-                    <th>Products</th>
-                    <th>Address</th>
-                    <th>City</th>
-                    <th>Price</th>
-                    <th>Status</th>
+                    <th>Produits</th>
+                    <th>Date</th>
+                    <th>Adresse</th>
+                    <th>Ville</th>
+                    <th>Total</th>
+                    <th>Statut</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -158,6 +180,7 @@ const Dashboard = () => {
                               )
                               .join(", ")}
                       </td>
+                      <td>{cmd.date}</td>
                       <td>{cmd.address}</td>
                       <td>{cmd.city}</td>
                       <td>
@@ -178,6 +201,9 @@ const Dashboard = () => {
                             backgroundColor:
                               statusColor[cmd.status]?.backgroundColor,
                             color: statusColor[cmd.status]?.color,
+                            border: `1px solid ${
+                              statusColor[cmd.status]?.color
+                            }`,
                           }}
                         >
                           {cmd.status}

@@ -12,9 +12,9 @@
   padding: 32px 0;
 }
 .dashboardContainer {
+  gap: 24px;
+  display: grid;
   padding: 32px 24px;
-  background: #faf9f6;
-  min-height: 100vh;
   font-family: "Inter";
   font-size: 14px;
 }
@@ -23,26 +23,39 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 24px;
-  margin-bottom: 24px;
 }
 
 .card {
   gap: 12px;
   display: grid;
   background: #fff;
+  color: #1c1c3a;
+  border: 1px solid #f2f2f2;
   border-radius: 12px;
   //   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   padding: 24px 16px;
   transition: box-shadow 0.2s;
+
+  p {
+    gap: 8px;
+    display: flex;
+  }
+
+  h2 {
+    font-size: 32px;
+    line-height: 32px;
+  }
 }
 .card:hover {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
 
 .tablesSection {
+  gap: 32px;
   display: flex;
   flex-wrap: wrap;
-  gap: 32px;
+  border-radius: 12px;
+  border: 1px solid #f2f2f2;
 }
 
 .tableBlock {
@@ -60,6 +73,13 @@
   width: 100%;
   padding: 20px;
   border-collapse: collapse;
+
+  th:first-child {
+    border-radius: 12px 0 0;
+  }
+  th:last-child {
+    border-radius: 0 12px 0 0;
+  }
 }
 .table th,
 .table td {
@@ -89,7 +109,7 @@
 
 .paginationContainer {
   gap: 6px;
-  padding: 20px;
+  padding: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
